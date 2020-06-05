@@ -1,12 +1,9 @@
 const express = require('express');
 const port = process.env.PORT;
 const app= express();
-app.get('/',function(req,res){
-     return res.json(200,
-         {
-             message:"List of posts",
-             posts:"hey"
-         });
+app.use(express.urlencoded({extended:false}));
+app.post('/',function(req,res){
+     res.send(JSON.stringify({'fulfillmentText':"hello"}));
  })
 app.listen(port,function(err){
     if(err){
