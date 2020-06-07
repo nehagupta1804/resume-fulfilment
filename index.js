@@ -25,11 +25,11 @@ app.post('/',function(req,res){
      {
         result+= (i+1).toString() +jobsArray[i].title +" and "+ jobsArray[i].url +'  \n';
      }
-    return res.json(200,
-        {
-            'fulfillmentText':result
-        });
-   
+    // return res.json(200,
+    //     {
+    //         'fulfillmentText':result
+    //     });
+   res.send(JSON.stringify({'fulfillmentText':result,"displayText":"Yo!"}));
   });
 
 }).on("error", (err) => {
