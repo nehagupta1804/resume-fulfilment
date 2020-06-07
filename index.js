@@ -25,13 +25,11 @@ app.post('/',function(req,res){
      {
         result+= i+1 + "."+ jobsArray[i].title +" and "+ jobsArray[i].url +" ,";
      }
-    // return res.json(200,
-    //     {
-    //         'fulfillmentText':JSON.stringify(result)
-    //     });
-    res.send({
-        fulfillmentText: JSON.stringify(result)
-    });
+    return res.json(200,
+        {
+            'fulfillmentText':JSON.stringify(result)
+        });
+    
   });
 
 }).on("error", (err) => {
