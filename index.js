@@ -27,7 +27,7 @@ app.post('/',function(req,res){
      }
     return res.json(200,
         {
-            'fulfillmentText':JSON.stringify(result)
+            'fulfillmentText':result
         });
    ;
   });
