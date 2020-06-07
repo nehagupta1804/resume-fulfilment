@@ -27,7 +27,13 @@ app.post('/',function(req,res){
      }
     return res.json(200,
         {
-            'fulfillmentText':result
+          "fulfillmentMessages": [
+            {
+              "text": {
+                "text": [result]
+              }
+            }
+          ]
             
         });
    ;
