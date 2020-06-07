@@ -23,20 +23,31 @@ app.post('/',function(req,res){
      var result="";
      for(var i=0;i<jobsArray.length;i++)
      {
-        result+= (i+1).toString()+jobsArray[i].title +" and "+ jobsArray[i].url +'   \n';
+        result+= (i+1).toString()+jobsArray[i].title +" and "+ jobsArray[i].url +"  \n";
      }
-    return res.json(200,
-        {
-          "fulfillmentMessages": [
-            {
-              "text": {
-                "text": [result]
-              }
-            }
-          ]
+    // return res.json(200,
+    //     {
+    //       "fulfillmentMessages": [
+    //         {
+    //           "text": {
+    //             "text": [result]
+    //           }
+    //         }
+    //       ]
             
-        });
-   ;
+    //     });
+
+    return res.send(JSON.stringify({
+      "fulfillmentMessages": [
+        {
+          "text": {
+            "text": [result]
+          }
+        }
+      ]
+        
+    }));
+   
   });
 
 }).on("error", (err) => {
