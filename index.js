@@ -29,7 +29,7 @@ app.post('/',function(req,res){
     //     {
     //         'fulfillmentText':JSON.stringify(result)
     //     });
-    res.end({
+    res.send({
         fulfillmentText: result
     });
   });
