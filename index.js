@@ -25,28 +25,19 @@ app.post('/',function(req,res){
      {
         result+= (i+1).toString()+jobsArray[i].title +" and "+ jobsArray[i].url +"  \n";
      }
-    // return res.json(200,
-    //     {
-    //       "fulfillmentMessages": [
-    //         {
-    //           "text": {
-    //             "text": [result]
-    //           }
-    //         }
-    //       ]
-            
-    //     });
-
-    return res.send(JSON.stringify({
-      "fulfillmentMessages": [
+    return res.json(200,
         {
-          "text": {
-            "text": [result]
-          }
-        }
-      ]
-        
-    }));
+          "fulfillmentMessages": [
+            {
+              "text": {
+                "text": [result]
+              }
+            }
+          ]
+            
+        });
+
+    
    
   });
 
