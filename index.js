@@ -30,7 +30,7 @@ app.post('/',function(req,res){
     //         'fulfillmentText':JSON.stringify(result)
     //     });
     res.send({
-        fulfillmentText: result
+        fulfillmentText: JSON.stringify(result)
     });
   });
 
