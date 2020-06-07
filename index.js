@@ -5,9 +5,9 @@ const https = require('https');
 app.use(express.urlencoded({extended:false}));
 app.post('/',function(req,res){
 
-  
+  var skill = req.body.queryResult.parameters[skill_name];
 
-  https.get('https://jobs.github.com/positions.json?description=python&location=new+york', (resp) => {
+  https.get("https://jobs.github.com/positions.json?description="+skill+"&location=new+york", (resp) => {
   let data = '';
 
   resp.on('data', (chunk) => {
@@ -15,8 +15,8 @@ app.post('/',function(req,res){
   });
 
   resp.on('end', () => {
-    console.log(req.body);
-    // console.log(JSON.parse(data));
+     console.log(skill+",");
+     console.log(JSON.parse(data));
     return res.json(200,
         {
             'fulfillmentText':data
