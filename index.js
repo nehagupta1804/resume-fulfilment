@@ -27,13 +27,17 @@ app.post('/',function(req,res){
      }
     return res.json(200,
         {
-          "fulfillmentMessages": [
-            {
-              "text": {
-                "text": [result]
-              }
-            }
-          ]
+          // "fulfillmentMessages": [
+          //   {
+          //     "text": {
+          //       "text": [result]
+          //     }
+          //   }
+          // ]
+          "card":{
+            "title":"hi",
+            "subtitle":"hello"
+          }
             
         });
 
