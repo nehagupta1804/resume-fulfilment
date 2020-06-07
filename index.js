@@ -19,9 +19,15 @@ app.post('/',function(req,res){
   resp.on('end', () => {
      console.log(skill+",");
      console.log(JSON.parse(data));
+     var jobsArray =  JSON.parse(data);
+     var result="";
+     for(var i=0;i<jobsArray.length;i++)
+     {
+        result+= i+1 + "."+ jobsArray[i].title +" and "+ jobsArray[i].url +" ,";
+     }
     return res.json(200,
         {
-            'fulfillmentText':data
+            'fulfillmentText':result
         });
   });
 
