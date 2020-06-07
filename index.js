@@ -29,9 +29,7 @@ app.post('/',function(req,res){
         {
           "fulfillmentMessages": [
             {
-              "text": {
-                "text": result
-              }
+              "text": result
             }
           ]
         });
