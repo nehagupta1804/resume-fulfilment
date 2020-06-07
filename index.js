@@ -1,11 +1,12 @@
 const express = require('express');
 const port = process.env.PORT;
 const app= express();
+
 const https = require('https');
 app.use(express.urlencoded({extended:false}));
 app.post('/',function(req,res){
 
-  var skill = req.body.queryResult ;
+  var skill = req.body;
   console.log(skill);
 
 //   https.get("https://jobs.github.com/positions.json?description="+skill+"&location=new+york", (resp) => {
