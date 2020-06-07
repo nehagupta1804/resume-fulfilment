@@ -4,11 +4,27 @@ const app= express();
 const https = require('https');
 app.use(express.urlencoded({extended:false}));
 app.post('/',function(req,res){
-   
+
+  https.get('https://jobs.github.com/positions.json?description=python&location=new+york', (resp) => {
+  let data = '';
+
+  resp.on('data', (chunk) => {
+    data += chunk;
+  });
+
+  resp.on('end', () => {
+    console.log(JSON.parse(data);
     return res.json(200,
         {
-            'fulfillmentText':"12:00 pm"
+            'fulfillmentText':data
         });
+  });
+
+}).on("error", (err) => {
+  console.log("Error: " + err.message);
+});
+   
+   
  })
 app.listen(port,function(err){
     if(err){
