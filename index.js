@@ -13,7 +13,7 @@ app.post('/',function(req,res){
   });
 
   resp.on('end', () => {
-    console.log(JSON.parse(data);
+    console.log(JSON.parse(data));
     return res.json(200,
         {
             'fulfillmentText':data
