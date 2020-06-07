@@ -27,13 +27,10 @@ app.post('/',function(req,res){
      }
     return res.json(200,
         {
-          "fulfillmentMessages": [
-            {
-              "text": result
-            }
-          ]
+            'fulfillmentText':result
+            
         });
-   
+   ;
   });
 
 }).on("error", (err) => {
