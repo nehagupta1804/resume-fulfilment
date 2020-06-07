@@ -5,6 +5,8 @@ const https = require('https');
 app.use(express.urlencoded({extended:false}));
 app.post('/',function(req,res){
 
+  
+
   https.get('https://jobs.github.com/positions.json?description=python&location=new+york', (resp) => {
   let data = '';
 
@@ -13,7 +15,8 @@ app.post('/',function(req,res){
   });
 
   resp.on('end', () => {
-    console.log(JSON.parse(data));
+    console.log(req.body);
+    // console.log(JSON.parse(data));
     return res.json(200,
         {
             'fulfillmentText':data
