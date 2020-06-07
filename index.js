@@ -7,7 +7,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.post('/',function(req,res){
 
-  var skill = req.body.queryResult.queryText;
+  var skill = req.body.queryResult.parameters["skill_name"];
   console.log(skill);
 
 //   https.get("https://jobs.github.com/positions.json?description="+skill+"&location=new+york", (resp) => {
