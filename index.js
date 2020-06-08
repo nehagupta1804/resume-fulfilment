@@ -3,6 +3,7 @@ const express = require('express');
 const port = process.env.PORT;
 const app= express();
 const mongoose = require("./config/mongoose");
+const User = require('./models/user');
 const https = require('https');
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
