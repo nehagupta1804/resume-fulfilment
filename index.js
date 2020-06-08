@@ -53,4 +53,24 @@ app.listen(port,function(err){
        console.log("Error in running server");
     }
     console.log("server started");
+    User.create({
+      name:"neha",
+      education:"experience",
+      experience:"abc",
+      project:"xyz",
+      skills:"c++",
+      interests:"dance",
+      achievements:"kpit"
+
+      
+  },function(err,user)
+  {
+        if(err)
+        {
+            console.log("Error");
+            return;
+        }
+        console.log("user created");
+       
+  })
 })
