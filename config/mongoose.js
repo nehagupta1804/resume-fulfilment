@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 
-mongoose.connect(`mongodb://neha1234:abcd1234@cluster0-o5jkl.mongodb.net/chatbot`);
+mongoose.connect('mongodb://neha1234:abcd1234@cluster0-o5jkl.mongodb.net/chatbot');
 //aqcuire the connection
 const db = mongoose.connection;
 //error
