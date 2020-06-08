@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 
-mongoose.connect(`mongodb://resume-fulfilment.herokuapp.com/skillsdb`);
+mongoose.connect(`mongodb://localhost/resume-fulfilment`);
 //aqcuire the connection
 const db = mongoose.connection;
 //error
