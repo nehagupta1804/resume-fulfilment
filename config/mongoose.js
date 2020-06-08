@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 
-mongoose.connect(`mongodb://localhost/resume-fulfilment`);
+mongoose.connect(`mongodb+srv://gupta.renu2311@gmail.com:abcd1234@cluster0-m6hmg.mongodb.net/chatbot?retryWrites=true&w=majority`);
 //aqcuire the connection
 const db = mongoose.connection;
 //error
