@@ -7,13 +7,40 @@ const User = require('./models/user');
 const https = require('https');
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
+var id;
 app.post('/',function(req,res){
 
   var skill = req.body.queryResult.parameters["skill_name"];
   var action = req.body.queryResult.action;
+  if(action =="getName"){
+
+      
+      User.create({
+        name:req.body.queryResult.queryText,
+        education:"N.A",
+        experience:"N.A",
+        project:"N.A",
+        skills:"N.A",
+        interests:"N.A",
+        achievements:"N.A"
+
+        
+    },function(err,user)
+    {
+          id = user._id;
+          console.log(id);
+          if(err)
+          {
+              console.log("Error");
+              return;
+          }
+          console.log("\n user created");
+        
+    })
   
 
-  if(action == "getJobBySkill"){
+  }
+  else if(action == "getJobBySkill"){
 
     https.get("https://jobs.github.com/positions.json?description="+skill+"&location=new+york", (resp) => {
     let data = '';
@@ -57,24 +84,5 @@ app.listen(port,function(err){
        console.log("Error in running server");
     }
     console.log("server started");
-    User.create({
-      name:"neha",
-      education:"experience",
-      experience:"abc",
-      project:"xyz",
-      skills:"c++",
-      interests:"dance",
-      achievements:"kpit"
-
-      
-  },function(err,user)
-  {
-        if(err)
-        {
-            console.log("Error");
-            return;
-        }
-        console.log("user created");
-       
-  })
-})
+    
+});
