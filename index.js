@@ -260,7 +260,14 @@ app.post('/',function(req,res){
         }
         else if(details == "experience")
         {
-          
+          for(var i=0;i<user.experience.length;i++)
+            {
+                result+= "Position: "+user.experience[i].position+","+
+                "Duration"+ user.experience[i].duration+","+
+                "Location"+ user.experience[i].location+","+
+                "Company Name: "+user.experience[i].company_name
+            }
+
         }  
         else if(details == "projects")
         {
