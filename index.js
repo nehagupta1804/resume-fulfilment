@@ -62,6 +62,7 @@ app.post('/',function(req,res){
              console.log("cant be update");
              return;
            }
+           console.log(user.skills);
            console.log("updated");
            return res.json(200,
             {
@@ -110,12 +111,13 @@ app.post('/',function(req,res){
         {
            if(err)
            {
-             console.log("cant be update");
+             console.log("can't be update");
              return;
            }
            console.log("updated");
            return res.json(200,
             {
+
               "fulfillmentMessages": [
                 {
                   "text": {
