@@ -27,16 +27,27 @@ app.post('/',function(req,res){
         
     },function(err,user)
     {
+        if(err)
+        {
+            console.log("Error");
+            return;
+        }
+        console.log(" user created \n");
           id = user._id;
           console.log(id);
-          if(err)
-          {
-              console.log("Error");
-              return;
-          }
-          console.log("\n user created");
+          return res.json(200,
+            {
+              "fulfillmentMessages": [
+                {
+                  "text": {
+                    "text": ["Enter education"]
+                  }
+                }
+              ]
+                
+            });    
         
-    })
+    });
   
 
   }
