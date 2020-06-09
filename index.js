@@ -7,9 +7,9 @@ const User = require('./models/user');
 const https = require('https');
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
-var id;
 var educationArray = [];
 var experienceArray=[];
+var id;
 app.post('/',function(req,res){
 
  
@@ -62,7 +62,7 @@ app.post('/',function(req,res){
              console.log("cant be update");
              return;
            }
-           console.log(user.skills);
+           console.log(user);
            console.log("updated");
            return res.json(200,
             {
