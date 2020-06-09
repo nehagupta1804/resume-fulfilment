@@ -40,7 +40,7 @@ app.post('/',function(req,res){
               "fulfillmentMessages": [
                 {
                   "text": {
-                    "text": "Enter education"
+                    "text": "Enter skills"
                   }
                 }
               ]
@@ -49,6 +49,19 @@ app.post('/',function(req,res){
         
     });
   
+  }
+  else if(action=="getSkills"){
+
+
+    User.findByIdAndUpdate(id,{"skills":req.body.queryResult.queryText},function(err,user)
+        {
+           if(err)
+           {
+             console.log("cant be update");
+             return;
+           }
+           console.log("updated");
+        });
 
   }
   else if(action == "getJobBySkill"){
