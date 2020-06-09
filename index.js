@@ -246,7 +246,13 @@ app.post('/',function(req,res){
         }
         else if(details == "education")
         {
-            
+            for(var i=0;i<user.education.length;i++)
+            {
+                result+= "Degree: "+user.education[i].degree+","+
+                "University_Name"+ user.education[i].university_name+","+
+                "Location"+ user.education[i].location+","+
+                "Percentage: "+user.education[i].percentage
+            }
         }
         else if(details == "name")
         {
