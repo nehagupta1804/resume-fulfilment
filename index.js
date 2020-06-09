@@ -156,7 +156,7 @@ app.post('/',function(req,res){
               "fulfillmentMessages": [
                 {
                   "text": {
-                    "text": "Want to enter more?"
+                    "text": ["Want to enter more?"]
                   }
                 }
               ]
