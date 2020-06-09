@@ -61,6 +61,68 @@ app.post('/',function(req,res){
              return;
            }
            console.log("updated");
+           return res.json(200,
+            {
+              "fulfillmentMessages": [
+                {
+                  "text": {
+                    "text": ["Enter interests"]
+                  }
+                }
+              ]
+                
+            });
+        });
+
+  }
+  else if(action=="getInterest"){
+
+
+    User.findByIdAndUpdate(id,{"interests":req.body.queryResult.queryText},function(err,user)
+        {
+           if(err)
+           {
+             console.log("cant be update");
+             return;
+           }
+           console.log("updated");
+           return res.json(200,
+            {
+              "fulfillmentMessages": [
+                {
+                  "text": {
+                    "text": ["Enter achievements"]
+                  }
+                }
+              ]
+                
+            });
+        });
+       
+
+  }
+  else if(action=="getAchievements"){
+
+
+    User.findByIdAndUpdate(id,{"achievements":req.body.queryResult.queryText},function(err,user)
+        {
+           if(err)
+           {
+             console.log("cant be update");
+             return;
+           }
+           console.log("updated");
+           return res.json(200,
+            {
+              "fulfillmentMessages": [
+                {
+                  "text": {
+                    "text": ["Okay.Thank you!"]
+                  }
+                }
+              ]
+                
+            });
         });
 
   }
