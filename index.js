@@ -234,7 +234,7 @@ app.post('/',function(req,res){
         var result;
         if(details == "skills")
         {
-            result = user.skill;
+            result = user.skills;
         }
         else if(details == "interests")
         {
