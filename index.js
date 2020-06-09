@@ -230,7 +230,7 @@ app.post('/',function(req,res){
 
     var id = req.body.queryResult.parameters["id"];;
     var details = req.body.queryResult.parameters["details"];
-    User.findById(id,function(err,user){
+    User.findOne({_id:id},function(err,user){
         var result;
         if(details == "skills")
         {
