@@ -231,7 +231,7 @@ app.post('/',function(req,res){
   }
   else if(action == "showDetails"){
 
-    var id = req.body.queryResult.parameters["id"];;
+    // var id = req.body.queryResult.parameters["id"];;
     var details = req.body.queryResult.parameters["details"];
     User.findOne({_id:id},function(err,user){
         var result="";
