@@ -29,13 +29,14 @@ app.post('/',function(req,res){
         
     },function(err,user)
     {
+         
         if(err)
         {
             console.log("Error");
             return;
         }
         console.log(" user created \n");
-          id = user._id;
+        id = user._id;
           console.log(id);
           return res.json(200,
             {
@@ -54,7 +55,7 @@ app.post('/',function(req,res){
   }
   else if(action=="getSkills"){
 
-
+    console.log(id);
     User.findByIdAndUpdate(id,{"skills":req.body.queryResult.queryText},function(err,user)
         {
            if(err)
