@@ -19,8 +19,8 @@ app.post('/',function(req,res){
     educationArray = [];
       User.create({
         name:req.body.queryResult.queryText,
-        education:"N.A",
-        experience:"N.A",
+        education:[],
+        experience:[],
         project:"N.A",
         skills:"N.A",
         interests:"N.A",
