@@ -225,7 +225,54 @@ app.post('/',function(req,res){
             });
         });
 
-    
+  }
+  else if(action == "showDetails"){
+
+    var id = req.body.queryResult.parameters["id"];;
+    var details = req.body.queryResult.parameters["details"];
+    User.findById(id,function(err,user){
+        var result;
+        if(details == "skills")
+        {
+            result = user.skill;
+        }
+        else if(details == "interests")
+        {
+            result = user.interests;
+        }
+        else if(details == "achievements")
+        {
+            result = user.achievements;
+        }
+        else if(details == "education")
+        {
+            
+        }
+        else if(details == "name")
+        {
+          result = user.name;
+        }
+        else if(details == "experience")
+        {
+          
+        }  
+        else if(details == "projects")
+        {
+          result = user.project;
+        }  
+        return res.json(200,
+          {
+            "fulfillmentMessages": [
+              {
+                "text": {
+                  "text": [result]
+                }
+              }
+            ]
+              
+          });
+
+    });
 
   }
   else if(action == "getJobBySkill"){
