@@ -8,13 +8,15 @@ const https = require('https');
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 var id;
+var educationArray = [];
+var experienceArray=[];
 app.post('/',function(req,res){
 
  
   var action = req.body.queryResult.action;
   if(action =="getName"){
-
-      
+    experienceArray=[];
+    educationArray = [];
       User.create({
         name:req.body.queryResult.queryText,
         education:"N.A",
@@ -117,13 +119,88 @@ app.post('/',function(req,res){
               "fulfillmentMessages": [
                 {
                   "text": {
-                    "text": ["Okay.Thank you!"]
+                    "text": ["Enter experience"]
                   }
                 }
               ]
                 
             });
         });
+
+  }
+  else if(action=="getEducation"){
+      
+    var degree = req.body.queryResult.parameters["degree"];
+    var university_name = req.body.queryResult.parameters["university_name"];
+    var location = req.body.queryResult.parameters["location"];
+    var percentage = req.body.queryResult.parameters["percentage"];
+    educationArray.push({
+
+      "degree": degree,
+       "university_name":university_name,
+       "location":location,
+       "percentage":percentage
+
+    });
+
+    User.findByIdAndUpdate(id,{"education":educationArray},function(err,user)
+        {
+           if(err)
+           {
+             console.log("cant be update");
+             return;
+           }
+           console.log("updated");
+           return res.json(200,
+            {
+              "fulfillmentMessages": [
+                {
+                  "text": {
+                    "text": "Want to enter more?"
+                  }
+                }
+              ]
+                
+            });
+        });
+
+  }
+  else if(action=="getExperience"){
+
+
+    var position = req.body.queryResult.parameters["position"];
+    var duration = req.body.queryResult.parameters["duration"];
+    var location = req.body.queryResult.parameters["location"];
+    var company_name = req.body.queryResult.parameters["company_name"];
+    experienceArray.push({
+      "position":position,
+      "duration":duration,
+      "location":location,
+      "company_name":company_name
+    });
+
+    User.findByIdAndUpdate(id,{"experience":experienceArray},function(err,user)
+        {
+           if(err)
+           {
+             console.log("cant be update");
+             return;
+           }
+           console.log("updated");
+           return res.json(200,
+            {
+              "fulfillmentMessages": [
+                {
+                  "text": {
+                    "text": ["Want to enter more?"]
+                  }
+                }
+              ]
+                
+            });
+        });
+
+    
 
   }
   else if(action == "getJobBySkill"){
