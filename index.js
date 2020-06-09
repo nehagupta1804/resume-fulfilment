@@ -119,6 +119,31 @@ app.post('/',function(req,res){
               "fulfillmentMessages": [
                 {
                   "text": {
+                    "text": ["Enter projects"]
+                  }
+                }
+              ]
+                
+            });
+        });
+
+  }
+  else if(action=="getProjects"){
+
+
+    User.findByIdAndUpdate(id,{"project":req.body.queryResult.queryText},function(err,user)
+        {
+           if(err)
+           {
+             console.log("cant be update");
+             return;
+           }
+           console.log("updated");
+           return res.json(200,
+            {
+              "fulfillmentMessages": [
+                {
+                  "text": {
                     "text": ["Enter experience"]
                   }
                 }
