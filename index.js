@@ -40,7 +40,7 @@ app.post('/',function(req,res){
               "fulfillmentMessages": [
                 {
                   "text": {
-                    "text": ["Enter education"]
+                    "text": "Enter education"
                   }
                 }
               ]
