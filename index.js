@@ -62,7 +62,7 @@ app.post('/',function(req,res){
              console.log("cant be update");
              return;
            }
-           console.log(user);
+           console.log(id);
            console.log("updated");
            return res.json(200,
             {
