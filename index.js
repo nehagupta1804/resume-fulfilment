@@ -11,6 +11,8 @@ app.post('/',function(req,res){
 
   var skill = req.body.queryResult.parameters["skill_name"];
   var action = req.body.queryResult.action;
+  
+
   if(action == "getJobBySkill"){
 
     https.get("https://jobs.github.com/positions.json?description="+skill+"&location=new+york", (resp) => {
@@ -33,7 +35,7 @@ app.post('/',function(req,res){
             "fulfillmentMessages": [
               {
                 "text": {
-                  "text": [result]
+                  "text": [result +"Want to create resume?"]
                 }
               }
             ]
