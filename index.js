@@ -14,6 +14,9 @@ app.post('/',function(req,res){
 
  
   var action = req.body.queryResult.action;
+
+  console.log('action: ' + action);
+  console.log('user id' + id);
   if(action =="getName"){
     experienceArray=[];
     educationArray = [];
@@ -24,11 +27,8 @@ app.post('/',function(req,res){
         project:"N.A",
         skills:"N.A",
         interests:"N.A",
-        achievements:"N.A"
-
-        
-    },function(err,user)
-    {
+        achievements:"N.A"  
+      },function(err,user) {
          
         if(err)
         {
@@ -50,7 +50,7 @@ app.post('/',function(req,res){
                 
             });    
         
-    });
+      });
   
   }
   else if(action=="getSkills"){
