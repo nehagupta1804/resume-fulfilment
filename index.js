@@ -132,7 +132,7 @@ app.post('/',function(req,res){
       
     var degree = req.body.queryResult.parameters["degree"];
     var university_name = req.body.queryResult.parameters["university_name"];
-    var location = req.body.queryResult.parameters["location"];
+    var location = req.body.queryResult.parameters["city"];
     var percentage = req.body.queryResult.parameters["percentage"];
     educationArray.push({
 
@@ -170,7 +170,7 @@ app.post('/',function(req,res){
 
     var position = req.body.queryResult.parameters["position"];
     var duration = req.body.queryResult.parameters["duration"];
-    var location = req.body.queryResult.parameters["location"];
+    var location = req.body.queryResult.parameters["city"];
     var company_name = req.body.queryResult.parameters["company_name"];
     experienceArray.push({
       "position":position,
