@@ -16,6 +16,7 @@ global.createPDFFile = function (htmlString, fileName, callback) {
      */ 
     pdf.create(htmlString, options).toFile('../public/pdf/' + fileName, function (err, data) {
         if (err) return console.log(err);
+        console.log(data);
         
       });
 }
