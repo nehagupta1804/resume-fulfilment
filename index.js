@@ -13,9 +13,10 @@ var educationArray = [];
 var experienceArray=[];
 var projectArray=[];
 var id;
+var search_id;
 app.get('/getResume',function(req,res){
 
-  User.findById("5ee09f8083b0d80017d98737",function(err,user){
+  User.findById(search_id,function(err,user){
     return res.render('resume',{
       title:"Resume",
       users:user
@@ -204,6 +205,23 @@ app.post('/',function(req,res){
             });
         });
 
+  }
+  else if(action == "getResume")
+  {
+     search_id = req.body.queryResult.parameters["id"];
+     return res.json(200,
+      {
+        "fulfillmentMessages": [
+          {
+            "text": {
+              "text": ["https://resume-fulfilment.herokuapp.com/getResume"]
+            }
+          }
+        ]
+          
+      });
+
+     
   }
   else if(action=="getEducation"){
       
