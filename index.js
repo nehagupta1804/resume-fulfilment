@@ -7,6 +7,7 @@ const User = require('./models/user');
 const https = require('https');
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
+app.use(express.static('./assets'));
 app.set('view engine','ejs');
 app.set('views','./views');
 var educationArray = [];
