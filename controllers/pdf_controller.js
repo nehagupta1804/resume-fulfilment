@@ -6,7 +6,7 @@ const path = require('path');
 var app = express();
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
-global.createPDFFile = function (htmlString, fileName, callback) {
+function createPDFFile(htmlString, fileName, callback) {
     var options = {
         format: 'Letter',
        
@@ -23,8 +23,7 @@ global.createPDFFile = function (htmlString, fileName, callback) {
 // var contents = fs.readFileSync('resume.ejs', 'utf8');
 var html = ejs.render('resume.ejs', {data: 'some data'});
 
-
-global.createPDFFile(html,'resume.pdf', function (err, result) {
+createPDFFile(html,'resume.pdf', function (err, result) {
     if (err) {
           console.log(err);
       } else { 
