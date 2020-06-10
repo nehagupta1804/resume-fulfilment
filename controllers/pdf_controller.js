@@ -21,7 +21,7 @@ function createPDFFile(htmlString, fileName, callback) {
         
       });
 }
- var contents = fs.readFileSync(path.join(__dirname)+".."+'/views/resume.ejs', 'utf8');
+//  var contents = fs.readFileSync(path.join(__dirname)+".."+'/views/resume.ejs', 'utf8');
 var html = ejs.render('resume.ejs', {data: 'some data'});
 
 createPDFFile(html,'output.pdf', function (err, result) {
