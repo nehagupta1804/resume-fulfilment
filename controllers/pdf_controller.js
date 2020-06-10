@@ -20,8 +20,8 @@ function createPDFFile(htmlString, fileName, callback) {
         
       });
 }
-// var contents = fs.readFileSync('resume.ejs', 'utf8');
-var html = ejs.render('resume.ejs', {data: 'some data'});
+var contents = fs.readFileSync('resume.ejs', 'utf8');
+var html = ejs.render(contents, {data: 'some data'});
 
 createPDFFile(html,'resume.pdf', function (err, result) {
     if (err) {
