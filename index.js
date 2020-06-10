@@ -7,7 +7,7 @@ const User = require('./models/user');
 const https = require('https');
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
-app.set('view engine','ejs');
+
 var educationArray = [];
 var experienceArray=[];
 var projectArray=[];
