@@ -124,7 +124,7 @@ app.post('/',function(req,res){
               "fulfillmentMessages": [
                 {
                   "text": {
-                    "text": ["Enter achievements"]
+                    "text": ["Enter experience"]
                   }
                 }
               ]
@@ -151,7 +151,7 @@ app.post('/',function(req,res){
               "fulfillmentMessages": [
                 {
                   "text": {
-                    "text": ["Enter projects"]
+                    "text": ["Thank you! Your resume has been recorded. Please note your id for accessing later. \n ID : " + id]
                   }
                 }
               ]
