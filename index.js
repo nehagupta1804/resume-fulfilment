@@ -9,6 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 var educationArray = [];
 var experienceArray=[];
+var projectArray=[];
 var id;
 app.post('/',function(req,res){
 
@@ -20,11 +21,13 @@ app.post('/',function(req,res){
   if(action =="getName"){
     experienceArray=[];
     educationArray = [];
+    projectArray=[];
       User.create({
         name:req.body.queryResult.queryText,
+        email:"N.A",
         education:[],
         experience:[],
-        project:"N.A",
+        project:[],
         skills:"N.A",
         interests:"N.A",
         achievements:"N.A"  
@@ -43,7 +46,7 @@ app.post('/',function(req,res){
               "fulfillmentMessages": [
                 {
                   "text": {
-                    "text": ["Enter skills"]
+                    "text": ["Enter email"]
                   }
                 }
               ]
@@ -52,6 +55,32 @@ app.post('/',function(req,res){
         
       });
   
+  }
+  else if(action=="getEmail"){
+
+    console.log(id);
+    User.findByIdAndUpdate(id,{"email":req.body.queryResult.queryText},function(err,user)
+        {
+           if(err)
+           {
+             console.log("cant be update");
+             return;
+           }
+           console.log(id);
+           console.log("updated");
+           return res.json(200,
+            {
+              "fulfillmentMessages": [
+                {
+                  "text": {
+                    "text": ["Enter skills"]
+                  }
+                }
+              ]
+                
+            });
+        });
+
   }
   else if(action=="getSkills"){
 
@@ -133,8 +162,16 @@ app.post('/',function(req,res){
   }
   else if(action=="getProjects"){
 
+    var title = req.body.queryResult.parameters["title"];
+    var description = req.body.queryResult.parameters["description"];
+    var year = req.body.queryResult.parameters["year"];
+    projectArray.push({
+      "title":title,
+      "description":description,
+      "year":year
 
-    User.findByIdAndUpdate(id,{"project":req.body.queryResult.queryText},function(err,user)
+    });
+    User.findByIdAndUpdate(id,{"project":projectArray},function(err,user)
         {
            if(err)
            {
@@ -243,6 +280,10 @@ app.post('/',function(req,res){
         {
             result = user.interests;
         }
+        else if(details == "email")
+        {
+            result = user.email;
+        }
         else if(details == "achievements")
         {
             result = user.achievements;
@@ -274,7 +315,12 @@ app.post('/',function(req,res){
         }  
         else if(details == "projects")
         {
-          result = user.project;
+          for(var i=0;i<user.project.length;i++)
+          {
+              result+= "Title: "+user.project[i].title+","+
+              "Description"+ user.project[i].description+","+
+              "Year"+ user.project[i].year+",";
+          }
         }  
         return res.json(200,
           {

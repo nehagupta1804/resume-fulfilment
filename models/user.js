@@ -8,6 +8,12 @@ const userSchema = new mongoose.Schema(
             required:true,
           
         },
+        email:{
+            type:String,
+            required:true,
+          
+        },
+
         education:[  
             {   
                 degree:{
@@ -49,10 +55,23 @@ const userSchema = new mongoose.Schema(
             }
            
         ],
-        project:{
-            type:String,
-            required:true,
-        },
+        project:[
+            {   
+                title:{
+                    type:String,
+                    required:true
+                },
+                description:{
+                    type:String,
+                    required:true
+                },
+                year:{
+                    type:String,
+                    required:true
+                }
+            }
+           
+        ],
         skills:{
             type:String,
             required:true,
