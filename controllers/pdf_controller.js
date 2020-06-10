@@ -2,7 +2,10 @@ const ejs = require('ejs');
 const fs = require('fs');
 const pdf = require('html-pdf');
 const express = require('express');
+const path = require('path');
 var app = express();
+app.set('view engine','ejs');
+app.set('views',path.join(__dirname,'views'));
 global.createPDFFile = function (htmlString, fileName, callback) {
     var options = {
         format: 'Letter',
@@ -17,7 +20,7 @@ global.createPDFFile = function (htmlString, fileName, callback) {
              config.get('app.port') + '/pdf/' + fileName)
       });
 }
-var contents = fs.readFileSync('../views/resume.ejs', 'utf8');
+var contents = fs.readFileSync('resume.ejs', 'utf8');
 
 
 global.createPDFFile(contents,'resume.pdf', function (err, result) {
