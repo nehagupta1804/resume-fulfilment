@@ -20,7 +20,7 @@ global.createPDFFile = function (htmlString, fileName, callback) {
              config.get('app.port') + '/pdf/' + fileName)
       });
 }
-var contents = fs.readFileSync('resume.ejs', 'utf8');
+// var contents = fs.readFileSync('resume.ejs', 'utf8');
 var html = res.render('resume.ejs', {data: 'some data'});
 
 
