@@ -206,7 +206,7 @@ app.post('/',function(req,res){
         });
 
   }
-  else if(action == "getResume")
+  else if(action == "showResume")
   {
      search_id = req.body.queryResult.parameters["id"];
      return res.json(200,
