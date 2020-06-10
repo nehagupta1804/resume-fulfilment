@@ -61,12 +61,12 @@
 	<div class="mainDetails">
 		
 		<div id="name">
-			<h1 class="quickFade delayTwo">Joe Bloggs</h1>
+			<h1 class="quickFade delayTwo"><%= users.name %></h1>
 		</div>
 		
 		<div id="contactDetails" class="quickFade delayFour">
 			<ul>
-				<li>email: <a href="mailto:joe@bloggs.com" target="_blank">joe@bloggs.com</a></li>
+				<li>email: <a href="mailto:joe@bloggs.com" target="_blank"><%= users.email %></a></li>
 			</ul>
 		</div>
 		<div class="clear"></div>
@@ -77,15 +77,16 @@
 			<div class="sectionTitle">
 				<h1>Work Experience</h1>
 			</div>
-			
+            <% for(experience of users.experience){ %>
 			<div class="sectionContent">
 				<article>
-					<h2>Comapany</h2>
-					<p class="subDetails">Duration</p>
-					<p>Position</p>
-					<p>Location</p>
+					<h2>Company:  <%= experience.company_name %></h2>
+					<p class="subDetails">Duration:  <%= experience.duration %></p>
+					<p>Position: <%= experience.position %></p>
+					<p>Location:  <%= experience.location %></p>
 				</article>
-			</div>
+            </div>
+            <%} %>
 			<div class="clear"></div>
 		</section>
 
@@ -93,15 +94,16 @@
 			<div class="sectionTitle">
 				<h1>Education</h1>
 			</div>
-			
+            <% for(education of users.education){ %>
 			<div class="sectionContent">
 				<article>
-					<h2>School Name</h2>
-					<p class="subDetails">Location</p>
-					<p>Degree</p>
-					<p>Percentage</p>
+					<h2>School Name:   <%= education.university_name %></h2>
+					<p class="subDetails">Location:   <%= education.location %></p>
+					<p>Degree:  <%= education.degree %></p>
+					<p>Percentage:  <%= education.percentage %></p>
 				</article>
-			</div>
+            </div>
+            <%} %>
 			<div class="clear"></div>
 		</section>
 
@@ -109,75 +111,43 @@
 			<div class="sectionTitle">
 				<h1>Projects</h1>
 			</div>
-			
+            <% for(project of users.project){ %>
 			<div class="sectionContent">
 				<article>
-					<h2>Title</h2>
-					<p class="subDetails">Duration</p>
-					<p>Description</p>
+					<h2>Title:   <%= project.title %></h2>
+					<p class="subDetails">Duration:  <%= project.year %></p>
+					<p>Description:  <%= project.description %></p>
 				</article>
-			</div>
+            </div>
+            <%} %>
 			<div class="clear"></div>
 		</section>
 		
 		
 		<section>
 			<div class="sectionTitle">
-				<h1>Key Skills</h1>
+				<h1>Key Skills:  <%= users.skills %></h1>
 			</div>
 			
-			<div class="sectionContent">
-				<ul class="keySkills">
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-				</ul>
-			</div>
+			
 			<div class="clear"></div>
 		</section>
 
 		<section>
 			<div class="sectionTitle">
-				<h1>Achievements</h1>
+				<h1>Achievements: <%= users.achievements %></h1>
 			</div>
 			
-			<div class="sectionContent">
-				<ul>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-				</ul>
-			</div>
+			
 			<div class="clear"></div>
 		</section>
 
 		<section>
 			<div class="sectionTitle">
-				<h1>Interests</h1>
+				<h1>Interests:  <%= users.interests %></h1>
 			</div>
 			
-			<div class="sectionContent">
-				<ul class="keySkills">
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-				</ul>
-			</div>
+			
 			<div class="clear"></div>
 		</section>
 		
