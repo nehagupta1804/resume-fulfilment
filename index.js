@@ -7,13 +7,21 @@ const User = require('./models/user');
 const https = require('https');
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
-
+app.set('view engine','ejs');
+app.set('views','./views');
 var educationArray = [];
 var experienceArray=[];
 var projectArray=[];
 var id;
 app.get('/getResume',function(req,res){
-  return res.send('<h1>hello</h1>');
+
+  User.findById("5ee09f8083b0d80017d98737",function(err,user){
+    return res.render('resume',{
+      title:"Resume",
+      users:user
+    }); 
+  })
+
 })
 app.post('/',function(req,res){
 
