@@ -12,8 +12,9 @@ var educationArray = [];
 var experienceArray=[];
 var projectArray=[];
 var id;
-require('./controllers/pdf_controller');
-
+app.get('/getResume',function(req,res){
+  return res.send('<h1>hello</h1>');
+})
 app.post('/',function(req,res){
 
  
