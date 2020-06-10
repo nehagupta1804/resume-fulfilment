@@ -268,9 +268,9 @@ app.post('/',function(req,res){
   }
   else if(action == "showDetails"){
 
-    // var id = req.body.queryResult.parameters["id"];;
+    var tokenId = req.body.queryResult.parameters["id"];
     var details = req.body.queryResult.parameters["details"];
-    User.findOne({_id:req.body.queryResult.parameters["id"]},function(err,user){
+    User.findOne({_id:tokenId},function(err,user){
         var result="";
         if(details == "skills")
         {
