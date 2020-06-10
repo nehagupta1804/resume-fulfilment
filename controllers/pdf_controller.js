@@ -21,9 +21,10 @@ global.createPDFFile = function (htmlString, fileName, callback) {
       });
 }
 var contents = fs.readFileSync('resume.ejs', 'utf8');
+var html = res.render('resume.ejs', {data: 'some data'});
 
 
-global.createPDFFile(contents,'resume.pdf', function (err, result) {
+global.createPDFFile(html,'resume.pdf', function (err, result) {
     if (err) {
           console.log(err);
       } else { 
