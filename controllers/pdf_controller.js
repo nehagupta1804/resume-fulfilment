@@ -16,8 +16,7 @@ global.createPDFFile = function (htmlString, fileName, callback) {
      */ 
     pdf.create(htmlString, options).toFile('../public/pdf/' + fileName, function (err, data) {
         if (err) return console.log(err);
-        return callback(null, config.get('AdminBaseURL') + ':' +
-             config.get('app.port') + '/pdf/' + fileName)
+        
       });
 }
 // var contents = fs.readFileSync('resume.ejs', 'utf8');
