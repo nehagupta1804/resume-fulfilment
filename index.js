@@ -40,7 +40,7 @@ app.post('/',function(req,res){
 
     if(flag == "add")
     {
-        query = req.body.queryResult.queryText;
+        query = req.body.queryResult.parameters["namelist"]["given-name"];
         User.findByIdAndUpdate(id, {
             "name": query
         }, function(err, user) {
@@ -71,7 +71,7 @@ app.post('/',function(req,res){
       educationArray = [];
       projectArray=[];
         User.create({
-          name:req.body.queryResult.queryText,
+          name:req.body.queryResult.parameters["namelist"]["given-name"],
           email:"N.A",
           education:[],
           experience:[],
