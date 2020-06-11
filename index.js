@@ -193,8 +193,7 @@ app.post('/',function(req,res){
       else if (flag == "delete") {
           var main_str = user.interests;
           var str = req.body.queryResult.queryText;
-          main_str = main_str.replace(str, "");
-          query = main_str.replace(/(^,)|(,$)/g, "");
+          query = main_str.replace(str, "");
           
       }
       User.findByIdAndUpdate(id, {
