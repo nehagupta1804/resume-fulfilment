@@ -102,28 +102,7 @@ app.post('/',function(req,res){
   }
   else if(action=="getSkills"){
 
-    // console.log(id);
-    // User.findByIdAndUpdate(id,{"skills":req.body.queryResult.queryText},function(err,user)
-    //     {
-    //        if(err)
-    //        {
-    //          console.log("cant be update");
-    //          return;
-    //        }
-    //        console.log(id);
-    //        console.log("updated");
-    //        return res.json(200,
-    //         {
-    //           "fulfillmentMessages": [
-    //             {
-    //               "text": {
-    //                 "text": ["Enter interests"]
-    //               }
-    //             }
-    //           ]
-                
-    //         });
-    //     });
+    
     User.findOne({
       _id: id
   }, function(err, user) {
@@ -166,26 +145,7 @@ app.post('/',function(req,res){
   else if(action=="getInterest"){
 
 
-    // User.findByIdAndUpdate(id,{"interests":req.body.queryResult.queryText},function(err,user)
-    //     {
-    //        if(err)
-    //        {
-    //          console.log("cant be update");
-    //          return;
-    //        }
-    //        console.log("updated");
-    //        return res.json(200,
-    //         {
-    //           "fulfillmentMessages": [
-    //             {
-    //               "text": {
-    //                 "text": ["Enter experience"]
-    //               }
-    //             }
-    //           ]
-                
-    //         });
-    //     });
+    
     User.findOne({
       _id: id
   }, function(err, user) {
@@ -228,27 +188,7 @@ app.post('/',function(req,res){
   else if(action=="getAchievements"){
 
 
-    // User.findByIdAndUpdate(id,{"achievements":req.body.queryResult.queryText},function(err,user)
-    //     {
-    //        if(err)
-    //        {
-    //          console.log("can't be update");
-    //          return;
-    //        }
-    //        console.log("updated");
-    //        return res.json(200,
-    //         {
-
-    //           "fulfillmentMessages": [
-    //             {
-    //               "text": {
-    //                 "text": ["Thank you! Your resume has been recorded. Please note your id for accessing later. \n ID : " + id]
-    //               }
-    //             }
-    //           ]
-                
-    //         });
-    //     });
+    
     User.findOne({
       _id: id
   }, function(err, user) {
@@ -289,35 +229,7 @@ app.post('/',function(req,res){
   }
   else if(action=="getProjects"){
 
-    // var title = req.body.queryResult.parameters["title"];
-    // var description = req.body.queryResult.parameters["description"];
-    // var year = req.body.queryResult.parameters["year"];
-    // projectArray.push({
-    //   "title":title,
-    //   "description":description,
-    //   "year":year
-
-    // });
-    // User.findByIdAndUpdate(id,{"project":projectArray},function(err,user)
-    //     {
-    //        if(err)
-    //        {
-    //          console.log("cant be update");
-    //          return;
-    //        }
-    //        console.log("updated");
-    //        return res.json(200,
-    //         {
-    //           "fulfillmentMessages": [
-    //             {
-    //               "text": {
-    //                 "text": ["Want to enter more?"]
-    //               }
-    //             }
-    //           ]
-                
-    //         });
-    //     });
+    
     var title = req.body.queryResult.parameters["title"];
         var year = req.body.queryResult.parameters["year"];
         var description = req.body.queryResult.parameters["description"];
@@ -379,39 +291,7 @@ app.post('/',function(req,res){
   }
   else if(action=="getEducation"){
       
-    // var degree = req.body.queryResult.parameters["degree"];
-    // var university_name = req.body.queryResult.parameters["university_name"];
-    // var location = req.body.queryResult.parameters["city"];
-    // var percentage = req.body.queryResult.parameters["percentage"];
-    // educationArray.push({
-
-    //   "degree": degree,
-    //    "university_name":university_name,
-    //    "location":location,
-    //    "percentage":percentage
-
-    // });
-
-    // User.findByIdAndUpdate(id,{"education":educationArray},function(err,user)
-    //     {
-    //        if(err)
-    //        {
-    //          console.log("cant be update");
-    //          return;
-    //        }
-    //        console.log("updated");
-    //        return res.json(200,
-    //         {
-    //           "fulfillmentMessages": [
-    //             {
-    //               "text": {
-    //                 "text": ["Want to enter more?"]
-    //               }
-    //             }
-    //           ]
-                
-    //         });
-    //     });
+    
     var degree = req.body.queryResult.parameters["degree"];
         var university_name = req.body.queryResult.parameters["university_name"];
         var location = req.body.queryResult.parameters["city"];
@@ -458,37 +338,7 @@ app.post('/',function(req,res){
   else if(action=="getExperience"){
 
 
-    // var position = req.body.queryResult.parameters["position"];
-    // var duration = req.body.queryResult.parameters["duration"];
-    // var location = req.body.queryResult.parameters["city"];
-    // var company_name = req.body.queryResult.parameters["company_name"];
-    // experienceArray.push({
-    //   "position":position,
-    //   "duration":duration,
-    //   "location":location,
-    //   "company_name":company_name
-    // });
-
-    // User.findByIdAndUpdate(id,{"experience":experienceArray},function(err,user)
-    //     {
-    //        if(err)
-    //        {
-    //          console.log("cant be update");
-    //          return;
-    //        }
-    //        console.log("updated");
-    //        return res.json(200,
-    //         {
-    //           "fulfillmentMessages": [
-    //             {
-    //               "text": {
-    //                 "text": ["Want to enter more?"]
-    //               }
-    //             }
-    //           ]
-                
-    //         });
-    //     });
+    
     var position = req.body.queryResult.parameters["position"];
         var duration = req.body.queryResult.parameters["duration"];
         var location = req.body.queryResult.parameters["city"];
