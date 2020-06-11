@@ -126,7 +126,17 @@
 		
 		<section>
 			<div class="sectionTitle">
-				<h1>Key Skills:  <%= users.skills %></h1>
+				<h1>Key Skills: </h1>
+			</div>
+			<div class="sectionContent">
+					<ul class="keySkills">
+				<%
+				   var skillsArray = user.skills.split(',');
+				   for(skill of skillsArray){
+				%>
+					<li><%= skill %></li>
+				<%} %>
+					</ul>
 			</div>
 			
 			
@@ -135,8 +145,18 @@
 
 		<section>
 			<div class="sectionTitle">
-				<h1>Achievements: <%= users.achievements %></h1>
+				<h1>Achievements: </h1>
 			</div>
+			<ul>
+			<div class="sectionContent">
+				<%
+				   var achievementArray = user.achievements.split(',');
+				   for(achievement of achievementArray){
+				%>
+					<li><%= achievement %></li>
+				<%} %>
+			</div>
+	    	</ul>
 			
 			
 			<div class="clear"></div>
@@ -144,7 +164,18 @@
 
 		<section>
 			<div class="sectionTitle">
-				<h1>Interests:  <%= users.interests %></h1>
+				<h1>Interests:  </h1>
+			</div>
+			<div class="sectionContent">
+					<ul class="keySkills">
+						<%
+						var interestsArray = user.interests.split(',');
+						for(interest of interestsArray){
+						%>
+							<li><%= interest %></li>
+						<%} %>
+					
+					</ul>
 			</div>
 			
 			
