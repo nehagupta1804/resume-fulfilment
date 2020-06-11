@@ -131,7 +131,7 @@
 			<div class="sectionContent">
 					<ul class="keySkills">
 				<%
-				   var skillsArray = user.skills.split(',');
+				   var skillsArray = users.skills.split(',');
 				   for(skill of skillsArray){
 				%>
 					<li><%= skill %></li>
@@ -150,7 +150,7 @@
 			<ul>
 			<div class="sectionContent">
 				<%
-				   var achievementArray = user.achievements.split(',');
+				   var achievementArray = users.achievements.split(',');
 				   for(achievement of achievementArray){
 				%>
 					<li><%= achievement %></li>
@@ -169,7 +169,7 @@
 			<div class="sectionContent">
 					<ul class="keySkills">
 						<%
-						var interestsArray = user.interests.split(',');
+						var interestsArray = users.interests.split(',');
 						for(interest of interestsArray){
 						%>
 							<li><%= interest %></li>
