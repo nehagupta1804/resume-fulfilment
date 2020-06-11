@@ -646,7 +646,7 @@ app.post('/',function(req,res){
               "simpleResponses": {
                 "simpleResponses": [
                   {
-                    "textToSpeech": [nextRes]
+                    "textToSpeech": [toSend]
                   }
                 ]
               }
