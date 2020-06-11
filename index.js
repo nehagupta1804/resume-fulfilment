@@ -70,8 +70,11 @@ app.post('/',function(req,res){
       experienceArray=[];
       educationArray = [];
       projectArray=[];
+     
+      query = req.body.queryResult.parameters["namelist"]["given-name"];
+      console.log(query);
         User.create({
-          name:req.body.queryResult.parameters["namelist"]["given-name"],
+          name: query,
           email:"N.A",
           education:[],
           experience:[],
