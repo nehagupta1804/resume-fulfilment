@@ -37,44 +37,54 @@ app.post('/',function(req,res){
   console.log('action: ' + action);
   console.log('user id' + id);
   if(action =="getName"){
-    experienceArray=[];
-    educationArray = [];
-    projectArray=[];
-      User.create({
-        name:req.body.queryResult.queryText,
-        email:"N.A",
-        education:[],
-        experience:[],
-        project:[],
-        skills:"N.A",
-        interests:"N.A",
-        achievements:"N.A"  
-      },function(err,user) {
-         
-        if(err)
-        {
-            console.log("Error");
-            return;
-        }
-        console.log(" user created \n");
-        id = user._id;
-          console.log(id);
-          nextRes= "Enter email"
-          if(flag == "add")
+
+    if(flag == "add")
+    {
+        query = req.body.queryResult.queryText;
+        User.findByIdAndUpdate(id, {
+            "name": query
+        }, function(err, user) {
+            if (err) {
+                console.log("cant be updated");
+                return;
+            }
+            console.log("updated");
+        });
+        nextRes = "Resume Updated";
+        return res.json(200, {
+          "fulfillmentMessages": [{
+              "text": {
+                  "text": [nextRes]
+              }
+          }]
+
+      });
+      
+    }else{
+      experienceArray=[];
+      educationArray = [];
+      projectArray=[];
+        User.create({
+          name:req.body.queryResult.queryText,
+          email:"N.A",
+          education:[],
+          experience:[],
+          project:[],
+          skills:"N.A",
+          interests:"N.A",
+          achievements:"N.A"  
+        },function(err,user) {
+          
+          if(err)
           {
-            query = req.body.queryResult.queryText;
-            User.findByIdAndUpdate(id, {
-                "name": query
-            }, function(err, user) {
-                if (err) {
-                    console.log("cant be updated");
-                    return;
-                }
-                console.log("updated");
-            });
-            nextRes = "Resume Updated";
-        }
-          return res.json(200, {
+              console.log("Error");
+              return;
+          }
+          console.log(" user created \n");
+          id = user._id;
+            console.log(id);
+            nextRes= "Enter email";
+            return res.json(200, {
               "fulfillmentMessages": [{
                   "text": {
                       "text": [nextRes]
@@ -83,7 +93,11 @@ app.post('/',function(req,res){
 
           });
           
-      });
+          
+          });
+      }
+          
+    
   
   }
   else if(action=="getEmail"){
@@ -101,18 +115,8 @@ app.post('/',function(req,res){
            nextRes = "Enter skills"
             if(flag == "add")
             {
-              query = req.body.queryResult.parameters["email"];
-              User.findByIdAndUpdate(id, {
-                  "email": query
-              }, function(err, user) {
-                  if (err) {
-                      console.log("cant be updated");
-                      return;
-                  }
-                  console.log("updated");
-              });
               nextRes = "Resume Updated";
-          }
+            }
            return res.json(200,
             {
               "fulfillmentMessages": [
