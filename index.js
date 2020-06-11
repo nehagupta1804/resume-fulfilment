@@ -194,7 +194,7 @@ app.post('/',function(req,res){
           var main_str = user.interests;
           var str = req.body.queryResult.queryText;
           query = main_str.replace(str, "");
-          query = main_str.replaceAll(", $", "");
+          query = main_str.replace(/(^,)|(,$)/g, "");
       }
       User.findByIdAndUpdate(id, {
           "interests": query
