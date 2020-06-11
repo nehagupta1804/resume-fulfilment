@@ -42,13 +42,13 @@ app.post('/',function(req,res){
     projectArray=[];
       User.create({
         name:req.body.queryResult.queryText,
-        email:"N.A",
+        email:"",
         education:[],
         experience:[],
         project:[],
-        skills:"N.A",
-        interests:"N.A",
-        achievements:"N.A"  
+        skills:"",
+        interests:"",
+        achievements:""  
       },function(err,user) {
          
         if(err)
