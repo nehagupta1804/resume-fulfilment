@@ -42,13 +42,13 @@ app.post('/',function(req,res){
     projectArray=[];
       User.create({
         name:req.body.queryResult.queryText,
-        email:" ",
+        email:"N.A",
         education:[],
         experience:[],
         project:[],
-        skills:" ",
-        interests:" ",
-        achievements:" "  
+        skills:"N.A",
+        interests:"N.A",
+        achievements:"N.A"  
       },function(err,user) {
          
         if(err)
@@ -59,18 +59,30 @@ app.post('/',function(req,res){
         console.log(" user created \n");
         id = user._id;
           console.log(id);
-          return res.json(200,
-            {
-              "fulfillmentMessages": [
-                {
-                  "text": {
-                    "text": ["Enter email"]
-                  }
+          nextRes= "Enter email"
+          if(flag == "add")
+          {
+            query = req.body.queryResult.queryText;
+            User.findByIdAndUpdate(id, {
+                "name": query
+            }, function(err, user) {
+                if (err) {
+                    console.log("cant be updated");
+                    return;
                 }
-              ]
-                
-            });    
-        
+                console.log("updated");
+            });
+            nextRes = "Resume Updated";
+        }
+          return res.json(200, {
+              "fulfillmentMessages": [{
+                  "text": {
+                      "text": [nextRes]
+                  }
+              }]
+
+          });
+          
       });
   
   }
@@ -86,12 +98,27 @@ app.post('/',function(req,res){
            }
            console.log(id);
            console.log("updated");
+           nextRes = "Enter skills"
+            if(flag == "add")
+            {
+              query = req.body.queryResult.parameters["email"];
+              User.findByIdAndUpdate(id, {
+                  "email": query
+              }, function(err, user) {
+                  if (err) {
+                      console.log("cant be updated");
+                      return;
+                  }
+                  console.log("updated");
+              });
+              nextRes = "Resume Updated";
+          }
            return res.json(200,
             {
               "fulfillmentMessages": [
                 {
                   "text": {
-                    "text": ["Enter skills"]
+                    "text": [nextRes]
                   }
                 }
               ]
@@ -110,8 +137,10 @@ app.post('/',function(req,res){
           console.log("cant be updated");
           return;
       }
-      if (flag == "add" || flag == "create")
-          query = user.skills + " " + req.body.queryResult.queryText;
+      if (flag == "create")
+          query = req.body.queryResult.queryText;
+      else if (flag == "add")
+          query = user.skills + ", " + req.body.queryResult.queryText;
       else if (flag == "delete") {
           var main_str = user.skills;
           var str = req.body.queryResult.queryText;
@@ -153,8 +182,10 @@ app.post('/',function(req,res){
           console.log("cant be updated");
           return;
       }
-      if (flag == "add" || flag == "create")
-          query = user.interests + " " + req.body.queryResult.queryText;
+      if (flag == "create")
+          query = req.body.queryResult.queryText;
+      else if (flag == "add")
+          query = user.interests + ", " + req.body.queryResult.queryText;
       else if (flag == "delete") {
           var main_str = user.interests;
           var str = req.body.queryResult.queryText;
@@ -196,8 +227,10 @@ app.post('/',function(req,res){
           console.log("cant be updated");
           return;
       }
-      if (flag == "add" || flag == "create")
-          query = user.achievements + " " + req.body.queryResult.queryText;
+      if (flag == "create")
+           query = req.body.queryResult.queryText;
+      else if (flag == "add")
+          query = user.achievements + ", " + req.body.queryResult.queryText;
       else if (flag == "delete") {
           var main_str = user.achievements;
           var str = req.body.queryResult.queryText;
@@ -214,7 +247,7 @@ app.post('/',function(req,res){
       });
       if (flag == "create")
           nextRes = "Thank you! Your resume gas been recorded. Please note your id for accessing later. ID : " + id;
-      else if (flag == "add")
+      else 
           nextRes = "Your resume has been updated";
       return res.json(200, {
           "fulfillmentMessages": [{
@@ -229,7 +262,7 @@ app.post('/',function(req,res){
   }
   else if(action=="getProjects"){
 
-    
+    projectArray = [];
     var title = req.body.queryResult.parameters["title"];
         var year = req.body.queryResult.parameters["year"];
         var description = req.body.queryResult.parameters["description"];
@@ -291,7 +324,7 @@ app.post('/',function(req,res){
   }
   else if(action=="getEducation"){
       
-    
+    educationArray = [];
     var degree = req.body.queryResult.parameters["degree"];
         var university_name = req.body.queryResult.parameters["university_name"];
         var location = req.body.queryResult.parameters["city"];
@@ -338,7 +371,7 @@ app.post('/',function(req,res){
   else if(action=="getExperience"){
 
 
-    
+    experienceArray = [];
     var position = req.body.queryResult.parameters["position"];
         var duration = req.body.queryResult.parameters["duration"];
         var location = req.body.queryResult.parameters["city"];
@@ -467,7 +500,11 @@ app.post('/',function(req,res){
             return;
         }
         console.log("found");
-        if (field == "skills")
+        if (field == "name")
+           toSend = user.name + " \n Add new?";
+        else if (field == "email")
+           toSend = user.email + " \n Add new?";
+        else if (field == "skills")
             toSend = user.skills + "\n Delete all or add new?";
         else if (field == "interests")
             toSend = user.interests + "\n Delete all or add new?";
