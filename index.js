@@ -691,7 +691,7 @@ app.post('/',function(req,res){
             "fulfillmentMessages": [
               {
                 "text": {
-                  "text": [result +"Want to create resume?"]
+                  "text": [result]
                 }
               }
             ]
