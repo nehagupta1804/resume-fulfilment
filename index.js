@@ -167,7 +167,7 @@ app.post('/',function(req,res){
         var main_str = user.skills;
         var str = req.body.queryResult.queryText;
         if(main_str.includes(",")){
-          query = main_str.replace(str+", ", "");
+          query = main_str.replace(str+",", "");
           query = main_str.replace(", " + str, "");
         }
         else
