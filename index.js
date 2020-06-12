@@ -589,60 +589,65 @@ app.post('/',function(req,res){
   }
   else if(action == "showDetails"){
 
-    var tokenId = req.body.queryResult.parameters["id"];
+    var tokenId = req.body.queryResult.parameters["any"];
     var details = req.body.queryResult.parameters["details"];
     User.findOne({_id:tokenId},function(err,user){
         var result="";
-        if(details == "skills")
-        {
-            result = user.skills;
+        if(err){
+          result = "Enter a valid ID";
         }
-        else if(details == "interests")
-        {
-            result = user.interests;
-        }
-        else if(details == "email")
-        {
-            result = user.email;
-        }
-        else if(details == "achievements")
-        {
-            result = user.achievements;
-        }
-        else if(details == "education")
-        {
-            for(var i=0;i<user.education.length;i++)
-            {
-                result+= "Degree: "+user.education[i].degree+","+
-                "University_Name"+ user.education[i].university_name+","+
-                "Location"+ user.education[i].location+","+
-                "Percentage: "+user.education[i].percentage
-            }
-        }
-        else if(details == "name")
-        {
-          result = user.name;
-        }
-        else if(details == "experience")
-        {
-          for(var i=0;i<user.experience.length;i++)
-            {
-                result+= "Position: "+user.experience[i].position+","+
-                "Duration"+ user.experience[i].duration+","+
-                "Location"+ user.experience[i].location+","+
-                "Company Name: "+user.experience[i].company_name
-            }
-
-        }  
-        else if(details == "projects")
-        {
-          for(var i=0;i<user.project.length;i++)
+        else{
+          if(details == "skills")
           {
-              result+= "Title: "+user.project[i].title+","+
-              "Description"+ user.project[i].description+","+
-              "Year"+ user.project[i].year+",";
+              result = user.skills;
           }
-        }  
+          else if(details == "interests")
+          {
+              result = user.interests;
+          }
+          else if(details == "email")
+          {
+              result = user.email;
+          }
+          else if(details == "achievements")
+          {
+              result = user.achievements;
+          }
+          else if(details == "education")
+          {
+              for(var i=0;i<user.education.length;i++)
+              {
+                  result+= "Degree: "+user.education[i].degree+","+
+                  "University_Name"+ user.education[i].university_name+","+
+                  "Location"+ user.education[i].location+","+
+                  "Percentage: "+user.education[i].percentage
+              }
+          }
+          else if(details == "name")
+          {
+            result = user.name;
+          }
+          else if(details == "experience")
+          {
+            for(var i=0;i<user.experience.length;i++)
+              {
+                  result+= "Position: "+user.experience[i].position+","+
+                  "Duration"+ user.experience[i].duration+","+
+                  "Location"+ user.experience[i].location+","+
+                  "Company Name: "+user.experience[i].company_name
+              }
+
+          }  
+          else if(details == "projects")
+          {
+            for(var i=0;i<user.project.length;i++)
+            {
+                result+= "Title: "+user.project[i].title+","+
+                "Description"+ user.project[i].description+","+
+                "Year"+ user.project[i].year+",";
+            }
+          }  
+        }
         return res.json(200, {
           "fulfillmentMessages": [
             {
