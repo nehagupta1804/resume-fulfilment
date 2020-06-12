@@ -390,7 +390,19 @@ app.post('/',function(req,res){
   }
   else if(action == "showResume")
   {
+    
      search_id = req.body.queryResult.parameters["id"];
+     User.findOne({
+            _id: search_id
+        }, function(err, user) {
+            if (err) {
+                console.log("cant be updated");
+                nextRes = "Enter a valid id";
+            }
+            else 
+                nextRes = "https://resume-fulfilment.herokuapp.com/getResume";
+      });
+
      return res.json(200, {
       "fulfillmentMessages": [
         {
@@ -398,7 +410,7 @@ app.post('/',function(req,res){
           "simpleResponses": {
             "simpleResponses": [
               {
-                "textToSpeech": ["https://resume-fulfilment.herokuapp.com/getResume"]
+                "textToSpeech": [nextRes]
               }
             ]
           }
