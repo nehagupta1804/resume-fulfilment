@@ -164,9 +164,12 @@ app.post('/',function(req,res){
       else if (flag == "add")
           query = user.skills + ", " + req.body.queryResult.queryText;
       else if (flag == "delete") {
-          var main_str = user.skills;
-          var str = req.body.queryResult.queryText;
-          query = main_str.replace(str, "");
+        var main_str = user.skills;
+        var str = req.body.queryResult.queryText;
+        if(main_str.includes(","))
+          query = main_str.replace(", " + str, "");
+        else
+        query = main_str.replace(str, "");
       }
       User.findByIdAndUpdate(id, {
           "skills": query
@@ -200,8 +203,6 @@ app.post('/',function(req,res){
 
   }
   else if(action=="getInterest"){
-
-
     
     User.findOne({
       _id: id
@@ -217,6 +218,9 @@ app.post('/',function(req,res){
       else if (flag == "delete") {
           var main_str = user.interests;
           var str = req.body.queryResult.queryText;
+          if(main_str.includes(","))
+            query = main_str.replace(", " + str, "");
+          else
           query = main_str.replace(str, "");
           
       }
@@ -230,7 +234,7 @@ app.post('/',function(req,res){
           console.log("updated");
       });
       if (flag == "create")
-          nextRes = "Enter experience";
+          nextRes = "Enter education";
       else
           nextRes = "Your resume has been updated";
           return res.json(200, {
@@ -253,8 +257,7 @@ app.post('/',function(req,res){
   }
   else if(action=="getAchievements"){
 
-
-    
+  
     User.findOne({
       _id: id
   }, function(err, user) {
@@ -269,6 +272,9 @@ app.post('/',function(req,res){
       else if (flag == "delete") {
           var main_str = user.achievements;
           var str = req.body.queryResult.queryText;
+          if(main_str.includes(","))
+            query = main_str.replace(", " + str, "");
+          else
           query = main_str.replace(str, "");
       }
       User.findByIdAndUpdate(id, {
@@ -332,24 +338,53 @@ app.post('/',function(req,res){
                 }
                 console.log("updated");
             });
-            if (flag == "create")
-                nextRes = "Want to enter more?";
-            else
-                nextRes = "Your resume has been updated";
-                return res.json(200, {
-                  "fulfillmentMessages": [
-                    {
-                      "platform": "ACTIONS_ON_GOOGLE",
-                      "simpleResponses": {
-                        "simpleResponses": [
-                          {
-                            "textToSpeech": [nextRes]
-                          }
-                        ]
-                      }
+            if (flag == "create"){
+              nextRes = "Want to enter more?";
+              return res.json(200, {
+                "fulfillmentMessages": [
+                  {
+                    "platform": "ACTIONS_ON_GOOGLE",
+                    "simpleResponses": {
+                      "simpleResponses": [
+                        {
+                          "textToSpeech": [nextRes]
+                        }
+                      ]
                     }
-                  ]
-              });
+                  },
+                  {
+                    "platform": "ACTIONS_ON_GOOGLE",
+                    "suggestions": {
+                      "suggestions": [
+                        {
+                          "title": "yes"
+                        },
+                        {
+                          "title": "no"
+                        }
+                      ]
+                    }
+                  }
+                 ]
+            });
+          }
+          else{
+              nextRes = "Your resume has been updated";
+              return res.json(200, {
+                "fulfillmentMessages": [
+                  {
+                    "platform": "ACTIONS_ON_GOOGLE",
+                    "simpleResponses": {
+                      "simpleResponses": [
+                        {
+                          "textToSpeech": [nextRes]
+                        }
+                      ]
+                    }
+                  }
+                ]
+            });
+          }
         });
 
   }
@@ -404,24 +439,54 @@ app.post('/',function(req,res){
                 }
                 console.log("updated");
             });
-            if (flag == "create")
-                nextRes = "Want to enter more?";
-            else
-                nextRes = "Your resume has been updated";
-                return res.json(200, {
-                  "fulfillmentMessages": [
-                    {
-                      "platform": "ACTIONS_ON_GOOGLE",
-                      "simpleResponses": {
-                        "simpleResponses": [
-                          {
-                            "textToSpeech": [nextRes]
-                          }
-                        ]
-                      }
+            if (flag == "create"){
+              nextRes = "Want to enter more?";
+              return res.json(200, {
+                "fulfillmentMessages": [
+                  {
+                    "platform": "ACTIONS_ON_GOOGLE",
+                    "simpleResponses": {
+                      "simpleResponses": [
+                        {
+                          "textToSpeech": [nextRes]
+                        }
+                      ]
                     }
-                  ]
-              });
+                  },
+                  {
+                    "platform": "ACTIONS_ON_GOOGLE",
+                    "suggestions": {
+                      "suggestions": [
+                        {
+                          "title": "yes"
+                        },
+                        {
+                          "title": "no"
+                        }
+                      ]
+                    }
+                  }
+                 ]
+            });
+          }
+          else{
+              nextRes = "Your resume has been updated";
+              return res.json(200, {
+                "fulfillmentMessages": [
+                  {
+                    "platform": "ACTIONS_ON_GOOGLE",
+                    "simpleResponses": {
+                      "simpleResponses": [
+                        {
+                          "textToSpeech": [nextRes]
+                        }
+                      ]
+                    }
+                  }
+                ]
+            });
+          }
+    
         });
 
   }
@@ -458,9 +523,37 @@ app.post('/',function(req,res){
                 }
                 console.log("updated");
             });
-            if (flag == "create")
+            if (flag == "create"){
                 nextRes = "Want to enter more?";
-            else
+                return res.json(200, {
+                  "fulfillmentMessages": [
+                    {
+                      "platform": "ACTIONS_ON_GOOGLE",
+                      "simpleResponses": {
+                        "simpleResponses": [
+                          {
+                            "textToSpeech": [nextRes]
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "platform": "ACTIONS_ON_GOOGLE",
+                      "suggestions": {
+                        "suggestions": [
+                          {
+                            "title": "yes"
+                          },
+                          {
+                            "title": "no"
+                          }
+                        ]
+                      }
+                    }
+                   ]
+              });
+            }
+            else{
                 nextRes = "Your resume has been updated";
                 return res.json(200, {
                   "fulfillmentMessages": [
@@ -476,6 +569,7 @@ app.post('/',function(req,res){
                     }
                   ]
               });
+            }
         });
 
   }
@@ -554,64 +648,128 @@ app.post('/',function(req,res){
 
   }
   else if (action == "updateResume") {
-    var len = 0;
-    var toSend = "";
-    field = req.body.queryResult.parameters["details"];
-    id = req.body.queryResult.parameters["id"];
-    User.findOne({
-        _id: id
-    }, function(err, user) {
-        if (err) {
-            console.log("cant be found");
-            return;
-        }
-        console.log("found");
-        if (field == "name")
-           toSend = user.name + " \n Add new?";
-        else if (field == "email")
-           toSend = user.email + " \n Add new?";
-        else if (field == "skills")
-            toSend = user.skills + "\n Delete all or add new?";
-        else if (field == "interests")
-            toSend = user.interests + "\n Delete all or add new?";
-        else if (field == "education") {
-            toSend = "";
-            len = user.education.length;
-            for (i = 0; i < len; i++)
-                toSend += (i + 1).toString() + " Degree: " + String(user.education[i].degree) + " School Name: " + String(user.education[i].university_name) + " Location: " + String(user.education[i].location) + " Percentage: " + String(user.education[i].percentage) + "\n";
-            toSend += "\n Delete some entry or add new?";
-        } else if (field == "projects") {
-            toSend = "";
-            len = user.project.length;
-            for (i = 0; i < len; i++)
-                toSend += (i + 1).toString() + " Title: " + String(user.project[i].title) + " Year: " + String(user.project[i].year) + " Description: " + String(user.project[i].description) + "\n";
-            toSend += "\n Delete some entry or add new?";
-        } else if (field == "experience") {
-            toSend = "";
-            len = user.experience.length;
-            for (i = 0; i < len; i++)
-                toSend += (i + 1).toString() + " Position: " + String(user.experience[i].position) + " Company: " + String(user.experience[i].company_name) + " Location: " + String(user.experience[i].location) + " Duration: " + String(user.experience[i].duration) + "\n";
-            toSend += "\n Delete some entry or add new?"
-        } else if (field == "achievements")
-            toSend = user.achievements + "\n Delete all or add new?";
-        else
-            toSend = "Not a valid query";
+        var len = 0;
+        var toSend = "";
+        field = req.body.queryResult.parameters["details"];
+        id = req.body.queryResult.parameters["id"];
+        User.findOne({
+            _id: id
+        }, function(err, user) {
+            if (err) {
+                console.log("cant be found");
+                return;
+            }
+            console.log("found");
+            if (field == "name"){
+                toSend = user.name + " \n Add new?";
+                return res.json(200, {
+                  "fulfillmentMessages": [
+                    {
+                      "platform": "ACTIONS_ON_GOOGLE",
+                      "simpleResponses": {
+                        "simpleResponses": [
+                          {
+                            "textToSpeech": [toSend]
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "platform": "ACTIONS_ON_GOOGLE",
+                      "suggestions": {
+                        "suggestions": [
+                          {
+                            "title": "add"
+                          },
+                        ]
+                      }
+                    }                 
+                  ]
+              });
+            }
+            else if (field == "email")
+                {
+                  toSend = user.email + " \n Add new?";
+                    return res.json(200, {
+                      "fulfillmentMessages": [
+                        {
+                          "platform": "ACTIONS_ON_GOOGLE",
+                          "simpleResponses": {
+                            "simpleResponses": [
+                              {
+                                "textToSpeech": [toSend]
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "platform": "ACTIONS_ON_GOOGLE",
+                          "suggestions": {
+                            "suggestions": [
+                              {
+                                "title": "add"
+                              },
+                            ]
+                          }
+                        }                 
+                      ]
+                  });
+                }
+            else if (field == "skills")
+                toSend = user.skills + "\n Delete or add new?";
+            else if (field == "interests")
+                toSend = user.interests + "\n Delete or add new?";
+            else if (field == "education") {
+                toSend = "";
+                len = user.education.length;
+                for (i = 0; i < len; i++)
+                    toSend += (i + 1).toString() + " Degree: " + String(user.education[i].degree) + " School Name: " + String(user.education[i].university_name) + " Location: " + String(user.education[i].location) + " Percentage: " + String(user.education[i].percentage) + "\n";
+                toSend += "\n Delete some entry or add new?";
+            } else if (field == "projects") {
+                toSend = "";
+                len = user.project.length;
+                for (i = 0; i < len; i++)
+                    toSend += (i + 1).toString() + " Title: " + String(user.project[i].title) + " Year: " + String(user.project[i].year) + " Description: " + String(user.project[i].description) + "\n";
+                toSend += "\n Delete some entry or add new?";
+            } else if (field == "experience") {
+                toSend = "";
+                len = user.experience.length;
+                for (i = 0; i < len; i++)
+                    toSend += (i + 1).toString() + " Position: " + String(user.experience[i].position) + " Company: " + String(user.experience[i].company_name) + " Location: " + String(user.experience[i].location) + " Duration: " + String(user.experience[i].duration) + "\n";
+                toSend += "\n Delete some entry or add new?"
+            } else if (field == "achievements")
+                toSend = user.achievements + "\n Delete all or add new?";
+            else
+                toSend = "Not a valid query";
 
             return res.json(200, {
-              "fulfillmentMessages": [
-                {
-                  "platform": "ACTIONS_ON_GOOGLE",
-                  "simpleResponses": {
-                    "simpleResponses": [
-                      {
-                        "textToSpeech": [toSend]
-                      }
-                    ]
-                  }
-                }
-              ]
-          });
-    });
+                "fulfillmentMessages": [
+                  {
+                    "platform": "ACTIONS_ON_GOOGLE",
+                    "simpleResponses": {
+                      "simpleResponses": [
+                        {
+                          "textToSpeech": [toSend]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "platform": "ACTIONS_ON_GOOGLE",
+                    "suggestions": {
+                      "suggestions": [
+                        {
+                          "title": "add"
+                        },
+                        {
+                          "title": "delete"
+                        }
+                      ]
+                    }
+                  }                 
+                ]
+            });
+        });
 
 } else if (action == "modifyAction") {
     var toSend = "";
@@ -780,6 +938,7 @@ app.post('/',function(req,res){
       {
           result+= (i+1).toString()+jobsArray[i].title +" and "+ jobsArray[i].url +"  \n";
       }
+      var toSend = result + " Want to create resume?";
       return res.json(200, {
         "fulfillmentMessages": [
           {
@@ -787,7 +946,20 @@ app.post('/',function(req,res){
             "simpleResponses": {
               "simpleResponses": [
                 {
-                  "textToSpeech": [result]
+                  "textToSpeech": [toSend]
+                }
+              ]
+            }
+          },
+          {
+            "platform": "ACTIONS_ON_GOOGLE",
+            "suggestions": {
+              "suggestions": [
+                {
+                  "title": "yes"
+                },
+                {
+                  "title": "no"
                 }
               ]
             }
