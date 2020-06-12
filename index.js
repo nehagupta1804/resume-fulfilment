@@ -612,6 +612,7 @@ app.post('/',function(req,res){
   else if(action == "showDetails"){
 
     var tokenId = req.body.queryResult.parameters["id"];
+    console.log(tokenId);
     var details = req.body.queryResult.parameters["details"];
     User.findOne({_id:tokenId},function(err,user){
         var result="";
