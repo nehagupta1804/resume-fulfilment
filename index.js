@@ -670,13 +670,26 @@ app.post('/',function(req,res){
         var len = 0;
         var toSend = "";
         field = req.body.queryResult.parameters["details"];
-        id = req.body.queryResult.parameters["id"];
+        id = req.body.queryResult.parameters["any"];
         User.findOne({
             _id: id
         }, function(err, user) {
             if (err) {
                 console.log("cant be found");
-                return;
+                toSend = "Enter a valid ID";
+                return res.json(200, {
+                  "fulfillmentMessages": [
+                    {
+                      "platform": "ACTIONS_ON_GOOGLE",
+                      "simpleResponses": {
+                        "simpleResponses": [
+                          {
+                            "textToSpeech": [toSend]
+                          }
+                        ]
+                      }
+                    }]
+                  });
             }
             console.log("found");
             if (field == "name"){
