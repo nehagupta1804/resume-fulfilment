@@ -413,7 +413,7 @@ app.post('/',function(req,res){
   else if(action == "showResume")
   {
     
-     search_id = req.body.queryResult.parameters["any"];
+     search_id = req.body.queryResult.parameters["id"];
      User.findOne({
             _id: search_id
         }, function(err, user) {
@@ -611,7 +611,7 @@ app.post('/',function(req,res){
   }
   else if(action == "showDetails"){
 
-    var tokenId = req.body.queryResult.parameters["any"];
+    var tokenId = req.body.queryResult.parameters["id"];
     var details = req.body.queryResult.parameters["details"];
     User.findOne({_id:tokenId},function(err,user){
         var result="";
@@ -692,7 +692,7 @@ app.post('/',function(req,res){
         var len = 0;
         var toSend = "";
         field = req.body.queryResult.parameters["details"];
-        id = req.body.queryResult.parameters["any"];
+        id = req.body.queryResult.parameters["id"];
         User.findOne({
             _id: id
         }, function(err, user) {
