@@ -161,8 +161,13 @@ app.post('/',function(req,res){
       }
       if (flag == "create")
           query = req.body.queryResult.queryText;
-      else if (flag == "add")
+      else if (flag == "add"){
+
+        if(String(user.skills).length == 0)
+          query = req.body.queryResult.queryText;
+      else
           query = user.skills + ", " + req.body.queryResult.queryText;
+          }
       else if (flag == "delete") {
         var main_str = user.skills;
         var str = req.body.queryResult.queryText;
@@ -216,7 +221,12 @@ app.post('/',function(req,res){
       if (flag == "create")
           query = req.body.queryResult.queryText;
       else if (flag == "add")
+      {
+        if(String(user.interests).length == 0)
+          query = req.body.queryResult.queryText;
+        else
           query = user.interests + ", " + req.body.queryResult.queryText;
+      }
       else if (flag == "delete") {
           var main_str = user.interests;
           var str = req.body.queryResult.queryText;
@@ -271,8 +281,12 @@ app.post('/',function(req,res){
       }
       if (flag == "create")
            query = req.body.queryResult.queryText;
-      else if (flag == "add")
-          query = user.achievements + ", " + req.body.queryResult.queryText;
+      else if (flag == "add"){
+          if(String(user.achievements).length == 0)
+            query = req.body.queryResult.queryText;
+          else
+            query = user.achievements + ", " + req.body.queryResult.queryText;
+      }
       else if (flag == "delete") {
           var main_str = user.achievements;
           var str = req.body.queryResult.queryText;
