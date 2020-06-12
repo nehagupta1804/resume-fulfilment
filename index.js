@@ -399,25 +399,27 @@ app.post('/',function(req,res){
                 console.log("cant be updated");
                 nextRes = "Enter a valid id";
             }
-            else 
+            else {
                 nextRes = "https://resume-fulfilment.herokuapp.com/getResume";
+            }
+            return res.json(200, {
+              "fulfillmentMessages": [
+                {
+                  "platform": "ACTIONS_ON_GOOGLE",
+                  "simpleResponses": {
+                    "simpleResponses": [
+                      {
+                        "textToSpeech": [nextRes]
+                      }
+                    ]
+                  }
+                }
+              ]
+          });
+        
       });
 
-     return res.json(200, {
-      "fulfillmentMessages": [
-        {
-          "platform": "ACTIONS_ON_GOOGLE",
-          "simpleResponses": {
-            "simpleResponses": [
-              {
-                "textToSpeech": [nextRes]
-              }
-            ]
-          }
-        }
-      ]
-  });
-
+     
      
   }
   else if(action=="getEducation"){
