@@ -619,6 +619,10 @@ app.post('/',function(req,res){
           result = "Enter a valid ID";
         }
         else{
+          if(details == "name")
+          {
+              result = user.name;
+          }
           if(details == "skills")
           {
               result = user.skills;
