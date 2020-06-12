@@ -166,9 +166,9 @@ app.post('/',function(req,res){
       else if (flag == "delete") {
         var main_str = user.skills;
         var str = req.body.queryResult.queryText;
-        if(main_str.includes(","))
-          query = main_str.replace(", " + str, "");
-        else
+        // if(main_str.includes(","))
+        //   query = main_str.replace(", " + str, "");
+        // else
         query = main_str.replace(str, "");
       }
       User.findByIdAndUpdate(id, {
