@@ -37,10 +37,14 @@ app.post('/',function(req,res){
   console.log('action: ' + action);
   console.log('user id' + id);
   if(action =="getName"){
+    var name = req.body.queryResult.parameters["namelist"]["given-name"];
+      if(name ===  undefined)
+        query = req.body.queryResult.parameters["namelist"];
+      else
+        query = req.body.queryResult.parameters["namelist"]["given-name"];
 
     if(flag == "add")
     {
-        query = req.body.queryResult.parameters["namelist"]["given-name"];
         User.findByIdAndUpdate(id, {
             "name": query
         }, function(err, user) {
@@ -70,8 +74,6 @@ app.post('/',function(req,res){
       experienceArray=[];
       educationArray = [];
       projectArray=[];
-     
-      query = req.body.queryResult.parameters["namelist"]["given-name"];
       console.log(query);
         User.create({
           name: query,
