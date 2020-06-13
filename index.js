@@ -14,8 +14,8 @@ var educationArray = [];
 var experienceArray=[];
 var projectArray=[];
 // var id;
-var search_id;
-var field = "";
+// var search_id;
+// var field = "";
 // var query = "";
 // var nextRes = "";
 // var flag = "create";
@@ -650,7 +650,7 @@ app.post('/',function(req,res){
                 nextRes = "Enter a valid id";
             }
             else {
-                nextRes = "https://resume-fulfilment.herokuapp.com/getResume/?="+search_id;
+                nextRes = "https://resume-fulfilment.herokuapp.com/getResume/?search_id="+search_id;
 
             }
             return res.json(200, {
