@@ -156,7 +156,7 @@ app.post('/',function(req,res){
     {
         var context = contexts[i];
         if(context.name.endsWith('updateid')){
-          id = JSON.parse(context.parameters.updateid);
+          id = context.parameters.updateid;
           break;
         }
     }
@@ -214,7 +214,7 @@ app.post('/',function(req,res){
       {
           var context = contexts[i];
           if(context.name.endsWith('updateid')){
-            id = JSON.parse(context.parameters.updateid);
+            id = context.parameters.updateid;
             break;
           }
       }
@@ -298,7 +298,7 @@ app.post('/',function(req,res){
       {
           var context = contexts[i];
           if(context.name.endsWith('updateid')){
-            id = JSON.parse(context.parameters.updateid);
+            id = context.parameters.updateid;
             break;
           }
       }
@@ -385,7 +385,7 @@ app.post('/',function(req,res){
       {
           var context = contexts[i];
           if(context.name.endsWith('updateid')){
-            id = JSON.parse(context.parameters.updateid);
+            id = context.parameters.updateid;
             break;
           }
       }
@@ -470,7 +470,7 @@ app.post('/',function(req,res){
       {
           var context = contexts[i];
           if(context.name.endsWith('updateid')){
-            id = JSON.parse(context.parameters.updateid);
+            id = context.parameters.updateid;
             break;
           }
       }
@@ -611,7 +611,7 @@ app.post('/',function(req,res){
           {
               var context = contexts[i];
               if(context.name.endsWith('updateid')){
-                id = JSON.parse(context.parameters.updateid);
+                id = context.parameters.updateid;
                 break;
               }
           }
@@ -719,7 +719,7 @@ app.post('/',function(req,res){
           {
               var context = contexts[i];
               if(context.name.endsWith('updateid')){
-                id = JSON.parse(context.parameters.updateid);
+                id = context.parameters.updateid;
                 break;
               }
           }
