@@ -18,7 +18,7 @@ var search_id;
 var field = "";
 var query = "";
 var nextRes = "";
-var flag = "create";
+// var flag = "create";
 app.get('/getResume',function(req,res){
 
   User.findById(search_id,function(err,user){
@@ -40,6 +40,18 @@ app.post('/',function(req,res){
         query = req.body.queryResult.parameters["namelist"];
       else
         query = req.body.queryResult.parameters["namelist"]["given-name"];
+    let flag;
+    let contexts = req.body.queryResult.outputContexts;
+    console.log(contexts);
+    for(let i=0;i<contexts.length;i++)
+    {
+        var context = contexts[i];
+        if(context.name.endsWith('flag')){
+          flag = context.parameters.flag;
+          break;
+        }
+    }
+    console.log(flag);
     if(flag == "add")
     {
       let id;
@@ -127,7 +139,15 @@ app.post('/',function(req,res){
               "parameters": {
                 "id": JSON.stringify(id)
               }
+            },
+            {
+              "name": req.body.session+"/contexts/flag",
+              "lifespanCount": 5,
+              "parameters": {
+                "flag":"create" 
+              }
             }
+
            ]
           });
           
@@ -951,7 +971,15 @@ app.post('/',function(req,res){
                         "parameters": {
                           "updateid": updateid
                         }
+                      },
+                      {
+                        "name": req.body.session+"/contexts/flag",
+                        "lifespanCount": 5,
+                        "parameters": {
+                          "flag":"add" 
+                        }
                       }
+                      
                     ]
               });
             }
