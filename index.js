@@ -650,9 +650,7 @@ app.post('/',function(req,res){
                 nextRes = "Enter a valid id";
             }
             else {
-                nextRes = "https://resume-fulfilment.herokuapp.com/getResume";
-                nextRes.searchParams.append('search_id', search_id);
-                nextRes.toString();
+                nextRes = "https://resume-fulfilment.herokuapp.com/getResume/?="+search_id;
 
             }
             return res.json(200, {
