@@ -10,9 +10,9 @@ app.use(express.urlencoded({extended:false}));
 app.use(express.static('./assets'));
 app.set('view engine','ejs');
 app.set('views','./views');
-var educationArray = [];
-var experienceArray=[];
-var projectArray=[];
+// var educationArray = [];
+// var experienceArray=[];
+// var projectArray=[];
 // var id;
 // var search_id;
 // var field = "";
@@ -97,9 +97,7 @@ app.post('/',function(req,res){
       });
       
     }else{
-        experienceArray=[];
-        educationArray = [];
-        projectArray=[];
+      
         console.log(query);
         User.create({
           name: query,
@@ -561,7 +559,7 @@ app.post('/',function(req,res){
     }
     console.log(id);
 
-      projectArray = [];
+      let  projectArray = [];
       var title = req.body.queryResult.parameters["title"];
       var year = req.body.queryResult.parameters["year"];
       var description = req.body.queryResult.parameters["description"];
@@ -715,7 +713,7 @@ app.post('/',function(req,res){
       
         }
         console.log(id);
-        educationArray = [];
+        let educationArray = [];
         var degree = req.body.queryResult.parameters["degree"];
         var university_name = req.body.queryResult.parameters["university_name"];
         var location = req.body.queryResult.parameters["city"];
@@ -837,7 +835,7 @@ app.post('/',function(req,res){
         }
         console.log(id);
 
-         experienceArray = [];
+        let experienceArray = [];
         var position = req.body.queryResult.parameters["position"];
         var duration = req.body.queryResult.parameters["duration"];
         var location = req.body.queryResult.parameters["city"];
