@@ -16,8 +16,8 @@ var projectArray=[];
 // var id;
 var search_id;
 var field = "";
-var query = "";
-var nextRes = "";
+// var query = "";
+// var nextRes = "";
 // var flag = "create";
 app.get('/getResume',function(req,res){
 
@@ -35,6 +35,7 @@ app.post('/',function(req,res){
   console.log('action: ' + action);
   // console.log('user id' + id);
   if(action =="getName"){
+      let nextRes,query;
       var name = req.body.queryResult.parameters["namelist"]["given-name"];
       if(name ===  undefined)
         query = req.body.queryResult.parameters["namelist"];
@@ -158,7 +159,7 @@ app.post('/',function(req,res){
   }
   else if(action=="getEmail"){
 
-  let flag;
+  let flag,nextRes;
   let contexts = req.body.queryResult.outputContexts;
   console.log(contexts);
   for(let i=0;i<contexts.length;i++)
@@ -228,7 +229,7 @@ app.post('/',function(req,res){
   }
   else if(action=="getSkills"){
 
-    let flag;
+    let flag,nextRes,query;
     let contexts = req.body.queryResult.outputContexts;
     console.log(contexts);
     for(let i=0;i<contexts.length;i++)
@@ -324,7 +325,7 @@ app.post('/',function(req,res){
   }
   else if(action=="getInterest"){
 
-    let flag;
+    let flag,nextRes,query;
     let contexts = req.body.queryResult.outputContexts;
     console.log(contexts);
     for(let i=0;i<contexts.length;i++)
@@ -423,7 +424,7 @@ app.post('/',function(req,res){
   }
   else if(action=="getAchievements"){
 
-    let flag;
+    let flag,nextRes,query;
     let contexts = req.body.queryResult.outputContexts;
     console.log(contexts);
     for(let i=0;i<contexts.length;i++)
@@ -520,7 +521,7 @@ app.post('/',function(req,res){
   }
   else if(action=="getProjects"){
 
-    let flag;
+    let flag,nextRes;
     let contexts = req.body.queryResult.outputContexts;
     console.log(contexts);
     for(let i=0;i<contexts.length;i++)
@@ -639,7 +640,7 @@ app.post('/',function(req,res){
   }
   else if(action == "showResume")
   {
-    
+     let nextRes;
      search_id = req.body.queryResult.parameters["id"];
      User.findOne({
             _id: search_id
@@ -673,7 +674,7 @@ app.post('/',function(req,res){
   }
   else if(action=="getEducation"){
 
-        let flag;
+        let flag,nextRes;
         let contexts = req.body.queryResult.outputContexts;
         console.log(contexts);
         for(let i=0;i<contexts.length;i++)
@@ -794,7 +795,7 @@ app.post('/',function(req,res){
   }
   else if(action=="getExperience"){
 
-        let flag;
+        let flag,nextRes;
         let contexts = req.body.queryResult.outputContexts;
         console.log(contexts);
         for(let i=0;i<contexts.length;i++)
@@ -1001,7 +1002,7 @@ app.post('/',function(req,res){
   else if (action == "updateResume") {
         var len = 0;
         var toSend = "";
-        field = req.body.queryResult.parameters["details"];
+        let field = req.body.queryResult.parameters["details"];
         let updateid = req.body.queryResult.parameters["id"];
         User.findOne({
             _id: updateid
@@ -1057,6 +1058,13 @@ app.post('/',function(req,res){
                         "parameters": {
                           "updateid": updateid
                         }
+                      },
+                      {
+                        "name": req.body.session+"/contexts/field",
+                        "lifespanCount": 5,
+                        "parameters": {
+                          "field": field
+                        }
                       }
                       
                     ]
@@ -1095,6 +1103,13 @@ app.post('/',function(req,res){
                         "lifespanCount": 5,
                         "parameters": {
                           "updateid": updateid
+                        }
+                      },
+                      {
+                        "name": req.body.session+"/contexts/field",
+                        "lifespanCount": 5,
+                        "parameters": {
+                          "field": field
                         }
                       }
                     ]
@@ -1161,13 +1176,32 @@ app.post('/',function(req,res){
                       "updateid": updateid
                     }
                   }
+                  ,
+                  {
+                    "name": req.body.session+"/contexts/field",
+                    "lifespanCount": 5,
+                    "parameters": {
+                      "field": field
+                    }
+                  }
                 ]
+                
             });
         });
 
 } else if (action == "modifyAction") {
-    let flag;
+    let flag,field;
     var toSend = "";
+    let contexts = req.body.queryResult.outputContexts;
+    console.log(contexts);
+    for(let i=0;i<contexts.length;i++)
+    {
+        var context = contexts[i];
+        if(context.name.endsWith('field')){
+          field = context.parameters.field;
+          break;
+        }
+    }
     var val = req.body.queryResult.queryText;
     if (val == "add") {
         flag = "add";
@@ -1217,14 +1251,18 @@ app.post('/',function(req,res){
       });
 } else if (action == "getIndex") {
     var index = req.body.queryResult.parameters["number"];
-    let id;
+    let id,nextRes,field;
     let contexts = req.body.queryResult.outputContexts;
     for(let i=0;i<contexts.length;i++)
     {
         var context = contexts[i];
         if(context.name.endsWith('updateId')){
           id = JSON.parse(context.parameters.updateId);
-          break;
+          
+        }
+        if(context.name.endsWith('field')){
+          field = context.parameters.field;
+         
         }
     }
     console.log(id);
