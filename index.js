@@ -949,7 +949,7 @@ app.post('/',function(req,res){
                         "name": req.body.session+"/contexts/updateId",
                         "lifespanCount": 5,
                         "parameters": {
-                          "updateId": JSON.stringify(updateId)
+                          "updateId": updateId
                         }
                       }
                     ]
@@ -987,7 +987,7 @@ app.post('/',function(req,res){
                         "name": req.body.session+"/contexts/updateId",
                         "lifespanCount": 5,
                         "parameters": {
-                          "updateId": JSON.stringify(updateId)
+                          "updateId": updateId
                         }
                       }
                     ]
@@ -1051,7 +1051,7 @@ app.post('/',function(req,res){
                     "name": req.body.session+"/contexts/updateId",
                     "lifespanCount": 5,
                     "parameters": {
-                      "updateId": JSON.stringify(updateId)
+                      "updateId": updateId
                     }
                   }
                 ]
