@@ -19,9 +19,9 @@ var field = "";
 // var query = "";
 // var nextRes = "";
 // var flag = "create";
-app.get('/getResume/:search_id',function(req,res){
+app.get('/getResume/',function(req,res){
 
-  User.findById(req.params.search_id,function(err,user){
+  User.findById(req.query.search_id,function(err,user){
     return res.render('resume',{
       title:"Resume",
       users:user
@@ -650,7 +650,10 @@ app.post('/',function(req,res){
                 nextRes = "Enter a valid id";
             }
             else {
-                nextRes = "https://resume-fulfilment.herokuapp.com/getResume/"+search_id.toString();
+                nextRes = "https://resume-fulfilment.herokuapp.com/getResume";
+                nextRes.searchParams.append('search_id', search_id);
+                nextRes.toString();
+
             }
             return res.json(200, {
               "fulfillmentMessages": [
