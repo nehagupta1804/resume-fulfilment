@@ -44,6 +44,7 @@ app.post('/',function(req,res){
     {
       let id;
       let contexts = req.body.queryResult.outputContexts;
+      console.log(contexts);
       for(let i=0;i<contexts.length;i++)
       {
           var context = contexts[i];
