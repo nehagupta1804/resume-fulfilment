@@ -13,7 +13,7 @@ app.set('views','./views');
 var educationArray = [];
 var experienceArray=[];
 var projectArray=[];
-var id;
+// var id;
 var search_id;
 var field = "";
 var query = "";
@@ -31,18 +31,15 @@ app.get('/getResume',function(req,res){
 })
 app.post('/',function(req,res){
 
- 
   var action = req.body.queryResult.action;
-
   console.log('action: ' + action);
-  console.log('user id' + id);
+  // console.log('user id' + id);
   if(action =="getName"){
-    var name = req.body.queryResult.parameters["namelist"]["given-name"];
+      var name = req.body.queryResult.parameters["namelist"]["given-name"];
       if(name ===  undefined)
         query = req.body.queryResult.parameters["namelist"];
       else
         query = req.body.queryResult.parameters["namelist"]["given-name"];
-
     if(flag == "add")
     {
         User.findByIdAndUpdate(id, {
@@ -68,13 +65,16 @@ app.post('/',function(req,res){
               }
             }
           ]
+
+
+
       });
       
     }else{
-      experienceArray=[];
-      educationArray = [];
-      projectArray=[];
-      console.log(query);
+        experienceArray=[];
+        educationArray = [];
+        projectArray=[];
+        console.log(query);
         User.create({
           name: query,
           email:"N.A",
@@ -92,7 +92,7 @@ app.post('/',function(req,res){
               return;
           }
           console.log(" user created \n");
-          id = user._id;
+          var id = user._id;
             console.log(id);
             nextRes= "Enter email";
             return res.json(200, {
@@ -107,56 +107,72 @@ app.post('/',function(req,res){
                     ]
                   }
                 }
-              ]
+              ],
+          "outputContexts": [
+            {
+              "name": req.body.session+"/contexts/id",
+              "lifespanCount": 5,
+              "parameters": {
+                "id": JSON.stringify(id)
+              }
+            }
+           ]
           });
           
           
           });
-      }
-          
-    
+        } 
   
   }
   else if(action=="getEmail"){
 
-    console.log(id);
-    User.findByIdAndUpdate(id,{"email":req.body.queryResult.queryText},function(err,user)
+  let id;
+  let contexts = req.body.queryResult.outputContexts;
+  for(let i=0;i<contexts.length;i++)
+  {
+      var context = contexts[i];
+      if(context.name.endsWith('id')){
+        id = JSON.parse(context.parameters.id);
+        break;
+      }
+  }
+  console.log(id);
+  User.findByIdAndUpdate(id,{"email":req.body.queryResult.queryText},function(err,user){
+        if(err)
         {
-           if(err)
-           {
-             console.log("cant be update");
-             return;
-           }
-           console.log(id);
-           console.log("updated");
-           nextRes = "Enter skills"
-            if(flag == "add")
+          console.log("cant be update");
+          return;
+        }
+        console.log(id);
+        console.log("updated");
+        nextRes = "Enter skills"
+        if(flag == "add")
+        {
+          nextRes = "Resume Updated";
+        }
+        return res.json(200, {
+          "fulfillmentMessages": [
             {
-              nextRes = "Resume Updated";
-            }
-            return res.json(200, {
-              "fulfillmentMessages": [
-                {
-                  "platform": "ACTIONS_ON_GOOGLE",
-                  "simpleResponses": {
-                    "simpleResponses": [
-                      {
-                        "textToSpeech": [nextRes]
-                      }
-                    ]
+              "platform": "ACTIONS_ON_GOOGLE",
+              "simpleResponses": {
+                "simpleResponses": [
+                  {
+                    "textToSpeech": [nextRes]
                   }
-                }
-              ]
-          });
-        });
+                ]
+              }
+            }
+          ]
+      });
+    });
 
   }
   else if(action=="getSkills"){
 
     
-    User.findOne({
+     User.findOne({
       _id: id
-  }, function(err, user) {
+     }, function(err, user) {
       if (err) {
           console.log("cant be updated");
           return;
@@ -164,21 +180,20 @@ app.post('/',function(req,res){
       if (flag == "create")
           query = req.body.queryResult.queryText;
       else if (flag == "add"){
-
         if(String(user.skills).length == 0)
           query = req.body.queryResult.queryText;
       else
           query = user.skills + ", " + req.body.queryResult.queryText;
-          }
+      }
       else if (flag == "delete") {
-        var main_str = user.skills;
-        var str = req.body.queryResult.queryText;
-        if(main_str.includes(", " + str))
-          query = main_str.replace(", " + str, "");
-        else if(main_str.includes(str + ","))
-          query = main_str.replace(str + ",", "");
-        else
-          query = main_str.replace(str, "");
+          var main_str = user.skills;
+          var str = req.body.queryResult.queryText;
+          if(main_str.includes(", " + str))
+            query = main_str.replace(", " + str, "");
+          else if(main_str.includes(str + ","))
+            query = main_str.replace(str + ",", "");
+          else
+            query = main_str.replace(str, "");
       }
       User.findByIdAndUpdate(id, {
           "skills": query
@@ -208,14 +223,12 @@ app.post('/',function(req,res){
             ]
         });
   });
-
-
   }
   else if(action=="getInterest"){
     
     User.findOne({
       _id: id
-  }, function(err, user) {
+   }, function(err, user) {
       if (err) {
           console.log("cant be updated");
           return;
@@ -332,63 +345,63 @@ app.post('/',function(req,res){
   }
   else if(action=="getProjects"){
 
-    projectArray = [];
-    var title = req.body.queryResult.parameters["title"];
-        var year = req.body.queryResult.parameters["year"];
-        var description = req.body.queryResult.parameters["description"];
-        projectArray.push({
-            "title": title,
-            "year": year,
-            "description": description
-        });
+      projectArray = [];
+      var title = req.body.queryResult.parameters["title"];
+      var year = req.body.queryResult.parameters["year"];
+      var description = req.body.queryResult.parameters["description"];
+      projectArray.push({
+          "title": title,
+          "year": year,
+          "description": description
+      });
 
-        User.findOne({
-            _id: id
-        }, function(err, user) {
-            if (err) {
-                console.log("cant be updated");
-                return;
-            }
-            User.findByIdAndUpdate(id, {
-                $push: {
-                    project: projectArray
-                }
-            }, function(err, user) {
-                if (err) {
-                    console.log("cant be updated");
-                    return;
-                }
-                console.log("updated");
-            });
-            if (flag == "create"){
-              nextRes = "Want to enter more?";
-              return res.json(200, {
-                "fulfillmentMessages": [
-                  {
-                    "platform": "ACTIONS_ON_GOOGLE",
-                    "simpleResponses": {
-                      "simpleResponses": [
-                        {
-                          "textToSpeech": [nextRes]
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "platform": "ACTIONS_ON_GOOGLE",
-                    "suggestions": {
-                      "suggestions": [
-                        {
-                          "title": "yes"
-                        },
-                        {
-                          "title": "no"
-                        }
-                      ]
-                    }
+      User.findOne({
+          _id: id
+      }, function(err, user) {
+          if (err) {
+              console.log("cant be updated");
+              return;
+          }
+          User.findByIdAndUpdate(id, {
+              $push: {
+                  project: projectArray
+              }
+          }, function(err, user) {
+              if (err) {
+                  console.log("cant be updated");
+                  return;
+              }
+              console.log("updated");
+          });
+          if (flag == "create"){
+            nextRes = "Want to enter more?";
+            return res.json(200, {
+              "fulfillmentMessages": [
+                {
+                  "platform": "ACTIONS_ON_GOOGLE",
+                  "simpleResponses": {
+                    "simpleResponses": [
+                      {
+                        "textToSpeech": [nextRes]
+                      }
+                    ]
                   }
-                 ]
-            });
+                },
+                {
+                  "platform": "ACTIONS_ON_GOOGLE",
+                  "suggestions": {
+                    "suggestions": [
+                      {
+                        "title": "yes"
+                      },
+                      {
+                        "title": "no"
+                      }
+                    ]
+                  }
+                }
+                ]
+          });
           }
           else{
               nextRes = "Your resume has been updated";
@@ -446,8 +459,8 @@ app.post('/',function(req,res){
   }
   else if(action=="getEducation"){
       
-    educationArray = [];
-    var degree = req.body.queryResult.parameters["degree"];
+        educationArray = [];
+        var degree = req.body.queryResult.parameters["degree"];
         var university_name = req.body.queryResult.parameters["university_name"];
         var location = req.body.queryResult.parameters["city"];
         var percentage = req.body.queryResult.parameters["percentage"];
@@ -529,8 +542,8 @@ app.post('/',function(req,res){
   else if(action=="getExperience"){
 
 
-    experienceArray = [];
-    var position = req.body.queryResult.parameters["position"];
+         experienceArray = [];
+        var position = req.body.queryResult.parameters["position"];
         var duration = req.body.queryResult.parameters["duration"];
         var location = req.body.queryResult.parameters["city"];
         var company_name = req.body.queryResult.parameters["company_name"];
