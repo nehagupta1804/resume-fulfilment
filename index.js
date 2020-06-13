@@ -1256,7 +1256,7 @@ app.post('/',function(req,res){
     for(let i=0;i<contexts.length;i++)
     {
         var context = contexts[i];
-        if(context.name.endsWith('updateId')){
+        if(context.name.endsWith('updateid')){
           id = JSON.parse(context.parameters.updateId);
           
         }
