@@ -48,8 +48,8 @@ app.post('/',function(req,res){
       for(let i=0;i<contexts.length;i++)
       {
           var context = contexts[i];
-          if(context.name.endsWith('updateId')){
-            id = JSON.parse(context.parameters.updateId);
+          if(context.name.endsWith('updateid')){
+            id = JSON.parse(context.parameters.updateid);
             break;
           }
       }
@@ -155,8 +155,8 @@ app.post('/',function(req,res){
     for(let i=0;i<contexts.length;i++)
     {
         var context = contexts[i];
-        if(context.name.endsWith('updateId')){
-          id = JSON.parse(context.parameters.updateId);
+        if(context.name.endsWith('updateid')){
+          id = JSON.parse(context.parameters.updateid);
           break;
         }
     }
@@ -213,8 +213,8 @@ app.post('/',function(req,res){
       for(let i=0;i<contexts.length;i++)
       {
           var context = contexts[i];
-          if(context.name.endsWith('updateId')){
-            id = JSON.parse(context.parameters.updateId);
+          if(context.name.endsWith('updateid')){
+            id = JSON.parse(context.parameters.updateid);
             break;
           }
       }
@@ -297,8 +297,8 @@ app.post('/',function(req,res){
       for(let i=0;i<contexts.length;i++)
       {
           var context = contexts[i];
-          if(context.name.endsWith('updateId')){
-            id = JSON.parse(context.parameters.updateId);
+          if(context.name.endsWith('updateid')){
+            id = JSON.parse(context.parameters.updateid);
             break;
           }
       }
@@ -384,8 +384,8 @@ app.post('/',function(req,res){
       for(let i=0;i<contexts.length;i++)
       {
           var context = contexts[i];
-          if(context.name.endsWith('updateId')){
-            id = JSON.parse(context.parameters.updateId);
+          if(context.name.endsWith('updateid')){
+            id = JSON.parse(context.parameters.updateid);
             break;
           }
       }
@@ -469,8 +469,8 @@ app.post('/',function(req,res){
       for(let i=0;i<contexts.length;i++)
       {
           var context = contexts[i];
-          if(context.name.endsWith('updateId')){
-            id = JSON.parse(context.parameters.updateId);
+          if(context.name.endsWith('updateid')){
+            id = JSON.parse(context.parameters.updateid);
             break;
           }
       }
@@ -610,8 +610,8 @@ app.post('/',function(req,res){
           for(let i=0;i<contexts.length;i++)
           {
               var context = contexts[i];
-              if(context.name.endsWith('updateId')){
-                id = JSON.parse(context.parameters.updateId);
+              if(context.name.endsWith('updateid')){
+                id = JSON.parse(context.parameters.updateid);
                 break;
               }
           }
@@ -718,8 +718,8 @@ app.post('/',function(req,res){
           for(let i=0;i<contexts.length;i++)
           {
               var context = contexts[i];
-              if(context.name.endsWith('updateId')){
-                id = JSON.parse(context.parameters.updateId);
+              if(context.name.endsWith('updateid')){
+                id = JSON.parse(context.parameters.updateid);
                 break;
               }
           }
@@ -946,10 +946,10 @@ app.post('/',function(req,res){
                   ],     
                     "outputContexts": [
                       {
-                        "name": req.body.session+"/contexts/updateId",
+                        "name": req.body.session+"/contexts/updateid",
                         "lifespanCount": 5,
                         "parameters": {
-                          "updateId": updateId
+                          "updateid": updateid
                         }
                       }
                     ]
@@ -984,10 +984,10 @@ app.post('/',function(req,res){
                        
                     "outputContexts": [
                       {
-                        "name": req.body.session+"/contexts/updateId",
+                        "name": req.body.session+"/contexts/updateid",
                         "lifespanCount": 5,
                         "parameters": {
-                          "updateId": updateId
+                          "updateid": updateid
                         }
                       }
                     ]
@@ -1048,10 +1048,10 @@ app.post('/',function(req,res){
                 ],
                 "outputContexts": [
                   {
-                    "name": req.body.session+"/contexts/updateId",
+                    "name": req.body.session+"/contexts/updateid",
                     "lifespanCount": 5,
                     "parameters": {
-                      "updateId": updateId
+                      "updateid": updateid
                     }
                   }
                 ]
