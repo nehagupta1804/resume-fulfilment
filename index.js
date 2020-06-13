@@ -158,6 +158,18 @@ app.post('/',function(req,res){
   }
   else if(action=="getEmail"){
 
+  let flag;
+  let contexts = req.body.queryResult.outputContexts;
+  console.log(contexts);
+  for(let i=0;i<contexts.length;i++)
+  {
+      var context = contexts[i];
+      if(context.name.endsWith('flag')){
+        flag = context.parameters.flag;
+        break;
+      }
+  }
+  console.log(flag);
   let id;
   if(flag=="create"){
 
@@ -215,6 +227,19 @@ app.post('/',function(req,res){
 
   }
   else if(action=="getSkills"){
+
+    let flag;
+    let contexts = req.body.queryResult.outputContexts;
+    console.log(contexts);
+    for(let i=0;i<contexts.length;i++)
+    {
+        var context = contexts[i];
+        if(context.name.endsWith('flag')){
+          flag = context.parameters.flag;
+          break;
+        }
+    }
+    console.log(flag);
 
     let id;
     if(flag=="create"){
@@ -299,7 +324,18 @@ app.post('/',function(req,res){
   }
   else if(action=="getInterest"){
 
-  
+    let flag;
+    let contexts = req.body.queryResult.outputContexts;
+    console.log(contexts);
+    for(let i=0;i<contexts.length;i++)
+    {
+        var context = contexts[i];
+        if(context.name.endsWith('flag')){
+          flag = context.parameters.flag;
+          break;
+        }
+    }
+    console.log(flag);
     let id;
     if(flag=="create"){
   
@@ -387,6 +423,18 @@ app.post('/',function(req,res){
   }
   else if(action=="getAchievements"){
 
+    let flag;
+    let contexts = req.body.queryResult.outputContexts;
+    console.log(contexts);
+    for(let i=0;i<contexts.length;i++)
+    {
+        var context = contexts[i];
+        if(context.name.endsWith('flag')){
+          flag = context.parameters.flag;
+          break;
+        }
+    }
+    console.log(flag);
     let id;
     if(flag=="create"){
   
@@ -472,6 +520,18 @@ app.post('/',function(req,res){
   }
   else if(action=="getProjects"){
 
+    let flag;
+    let contexts = req.body.queryResult.outputContexts;
+    console.log(contexts);
+    for(let i=0;i<contexts.length;i++)
+    {
+        var context = contexts[i];
+        if(context.name.endsWith('flag')){
+          flag = context.parameters.flag;
+          break;
+        }
+    }
+    console.log(flag);
     let id;
     if(flag=="create"){
   
@@ -612,7 +672,20 @@ app.post('/',function(req,res){
      
   }
   else if(action=="getEducation"){
-       
+
+        let flag;
+        let contexts = req.body.queryResult.outputContexts;
+        console.log(contexts);
+        for(let i=0;i<contexts.length;i++)
+        {
+            var context = contexts[i];
+            if(context.name.endsWith('flag')){
+              flag = context.parameters.flag;
+              break;
+            }
+        }
+        console.log(flag);
+          
         let id;
         if(flag=="create"){
       
@@ -720,6 +793,19 @@ app.post('/',function(req,res){
 
   }
   else if(action=="getExperience"){
+
+        let flag;
+        let contexts = req.body.queryResult.outputContexts;
+        console.log(contexts);
+        for(let i=0;i<contexts.length;i++)
+        {
+            var context = contexts[i];
+            if(context.name.endsWith('flag')){
+              flag = context.parameters.flag;
+              break;
+            }
+        }
+        console.log(flag);
 
         let id;
         if(flag=="create"){
@@ -971,13 +1057,6 @@ app.post('/',function(req,res){
                         "parameters": {
                           "updateid": updateid
                         }
-                      },
-                      {
-                        "name": req.body.session+"/contexts/flag",
-                        "lifespanCount": 5,
-                        "parameters": {
-                          "flag":"add" 
-                        }
                       }
                       
                     ]
@@ -1087,6 +1166,7 @@ app.post('/',function(req,res){
         });
 
 } else if (action == "modifyAction") {
+    let flag;
     var toSend = "";
     var val = req.body.queryResult.queryText;
     if (val == "add") {
@@ -1124,6 +1204,15 @@ app.post('/',function(req,res){
                 ]
               }
             }
+          ],
+          "outputContexts": [
+              {
+                "name": req.body.session+"/contexts/flag",
+                "lifespanCount": 5,
+                "parameters": {
+                  "flag":flag
+                }
+              }
           ]
       });
 } else if (action == "getIndex") {
