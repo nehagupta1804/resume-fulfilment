@@ -896,9 +896,9 @@ app.post('/',function(req,res){
         var len = 0;
         var toSend = "";
         field = req.body.queryResult.parameters["details"];
-        let updateId = req.body.queryResult.parameters["id"];
+        let updateid = req.body.queryResult.parameters["id"];
         User.findOne({
-            _id: updateId
+            _id: updateid
         }, function(err, user) {
             if (err) {
                 console.log("cant be found");
