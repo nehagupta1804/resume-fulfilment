@@ -92,8 +92,6 @@ app.post('/',function(req,res){
             }
           ]
 
-
-
       });
       
     }else{
@@ -204,11 +202,9 @@ app.post('/',function(req,res){
         }
         console.log(id);
         console.log("updated");
-        nextRes = "Enter skills"
-        if(flag == "add")
-        {
-          nextRes = "Resume Updated";
-        }
+        if (flag == "create")
+        {            
+        nextRes = "Please enter skills";
         return res.json(200, {
           "fulfillmentMessages": [
             {
@@ -220,9 +216,80 @@ app.post('/',function(req,res){
                   }
                 ]
               }
+            },
+            {
+            "platform": "ACTIONS_ON_GOOGLE",
+            "suggestions": {
+              "suggestions": [
+                {
+                  "title": "C"
+                },
+                {
+                  "title": "C++"
+                },
+                {
+                  "title": "App Development"
+                },
+                {
+                  "title": "Web Development"
+                },
+                {
+                  "title": "NodeJs"
+                },
+                {
+                  "title": "Javascript"
+                },
+                {
+                  "title": "Java"
+                },
+                {
+                  "title": "Git"
+                },
+                {
+                  "title": "Machine Learning"
+                },
+                {
+                  "title": "Internet of Things"
+                },
+                {
+                  "title": "Python"
+                },
+                {
+                  "title": "Data Science"
+                },
+                {
+                  "title": "Databases"
+                },
+                {
+                  "title": "Cloud"
+                },
+                {
+                  "title": "Blockchain"
+                }
+              ]
             }
+          }
           ]
       });
+      }
+      else
+        {
+          nextRes = "Resume Updated";
+        }
+        return res.json(200, {
+            "fulfillmentMessages": [
+              {
+                "platform": "ACTIONS_ON_GOOGLE",
+                "simpleResponses": {
+                  "simpleResponses": [
+                    {
+                      "textToSpeech": [nextRes]
+                    }
+                  ]
+                }
+              }
+            ]
+        });
     });
 
   }
@@ -301,26 +368,80 @@ app.post('/',function(req,res){
               return;
           }
           console.log("updated");
-      });
-      if (flag == "create")
-          nextRes = "Enter interests";
-      else
-          nextRes = "Your resume has been updated";
-          return res.json(200, {
-            "fulfillmentMessages": [
-              {
-                "platform": "ACTIONS_ON_GOOGLE",
-                "simpleResponses": {
-                  "simpleResponses": [
-                    {
-                      "textToSpeech": [nextRes]
+          if (flag == "create")
+          {
+            nextRes = "Please enter interests";
+            return res.json(200, {
+                "fulfillmentMessages": [
+                  {
+                    "platform": "ACTIONS_ON_GOOGLE",
+                    "simpleResponses": {
+                      "simpleResponses": [
+                        {
+                          "textToSpeech": [nextRes]
+                        }
+                      ]
                     }
-                  ]
+                  },
+                  {
+                  "platform": "ACTIONS_ON_GOOGLE",
+                  "suggestions": {
+                    "suggestions": [
+                      {
+                        "title": "Travelling"
+                      },
+                      {
+                        "title": "Chess"
+                      },
+                      {
+                        "title": "Reading Books"
+                      },
+                      {
+                        "title": "Swimming"
+                      },
+                      {
+                        "title": "Music"
+                      },
+                      {
+                        "title": "Dancing"
+                      },
+                      {
+                        "title": "Coding"
+                      },
+                      {
+                        "title": "Sports"
+                      },
+                      {
+                        "title": "Writing"
+                      }
+                    ]
+                  }
                 }
+                ]
+            });
+            
+          }
+      else if (flag == "add")
+        nextRes = "Resume Updated";
+      else
+          nextRes = "Resume Updated";
+      return res.json(200, {
+          "fulfillmentMessages": [
+            {
+              "platform": "ACTIONS_ON_GOOGLE",
+              "simpleResponses": {
+                "simpleResponses": [
+                  {
+                    "textToSpeech": [nextRes]
+                  }
+                ]
               }
-            ]
-        });
+            }
+          ]
+      });
   });
+      });
+     
   }
   else if(action=="getInterest"){
 
@@ -398,26 +519,31 @@ app.post('/',function(req,res){
               return;
           }
           console.log("updated");
-      });
-      if (flag == "create")
-          nextRes = "Enter education";
-      else
-          nextRes = "Your resume has been updated";
+          if (flag == "create")
+          nextRes = "Please enter education";
+          else if (flag == "add")
+            nextRes = "Resume Updated";
+          else
+              nextRes = "Resume Updated";
           return res.json(200, {
-            "fulfillmentMessages": [
-              {
-                "platform": "ACTIONS_ON_GOOGLE",
-                "simpleResponses": {
-                  "simpleResponses": [
-                    {
-                      "textToSpeech": [nextRes]
-                    }
-                  ]
+              "fulfillmentMessages": [
+                {
+                  "platform": "ACTIONS_ON_GOOGLE",
+                  "simpleResponses": {
+                    "simpleResponses": [
+                      {
+                        "textToSpeech": [nextRes]
+                      }
+                    ]
+                  }
                 }
-              }
-            ]
+              ]
+          });
         });
-  });
+          });
+          
+    
+
        
 
   }
@@ -1205,23 +1331,165 @@ app.post('/',function(req,res){
     var val = req.body.queryResult.queryText;
     if (val == "add") {
         flag = "add";
-        toSend = "Enter " + field;
+        if(field == "skills")
+            {
+              toSend = "Please enter new skill";
+              return res.json(200, {
+                      "fulfillmentMessages": [
+                        {
+                          "platform": "ACTIONS_ON_GOOGLE",
+                          "simpleResponses": {
+                            "simpleResponses": [
+                              {
+                                "textToSpeech": [toSend]
+                              }
+                            ]
+                          }
+                        },
+                        {
+                        "platform": "ACTIONS_ON_GOOGLE",
+                        "suggestions": {
+                          "suggestions": [
+                            {
+                              "title": "C"
+                            },
+                            {
+                              "title": "C++"
+                            },
+                            {
+                              "title": "App Development"
+                            },
+                            {
+                              "title": "Web Development"
+                            },
+                            {
+                              "title": "NodeJs"
+                            },
+                            {
+                              "title": "Javascript"
+                            },
+                            {
+                              "title": "Java"
+                            },
+                            {
+                              "title": "Git"
+                            },
+                            {
+                              "title": "Machine Learning"
+                            },
+                            {
+                              "title": "Internet of Things"
+                            },
+                            {
+                              "title": "Python"
+                            },
+                            {
+                              "title": "Data Science"
+                            },
+                            {
+                              "title": "Databases"
+                            },
+                            {
+                              "title": "Cloud"
+                            }
+                          ]
+                        }
+                      }
+                      ],
+                      "outputContexts": [
+                          {
+                            "name": req.body.session+"/contexts/flag",
+                            "lifespanCount": 5,
+                            "parameters": {
+                              "flag":flag
+                            }
+                          }
+                      ]
+                      
+                  });
+            }
+            else if (field == "interests")
+            {
+              toSend = "Please enter new interest";
+                  return res.json(200, {
+                      "fulfillmentMessages": [
+                        {
+                          "platform": "ACTIONS_ON_GOOGLE",
+                          "simpleResponses": {
+                            "simpleResponses": [
+                              {
+                                "textToSpeech": [toSend]
+                              }
+                            ]
+                          }
+                        },
+                        {
+                        "platform": "ACTIONS_ON_GOOGLE",
+                        "suggestions": {
+                          "suggestions": [
+                            {
+                              "title": "Travelling"
+                            },
+                            {
+                              "title": "Chess"
+                            },
+                            {
+                              "title": "Reading Books"
+                            },
+                            {
+                              "title": "Swimming"
+                            },
+                            {
+                              "title": "Music"
+                            },
+                            {
+                              "title": "Dancing"
+                            },
+                            {
+                              "title": "Coding"
+                            },
+                            {
+                              "title": "Sports"
+                            },
+                            {
+                              "title": "Writing"
+                            }
+                          ]
+                        }
+                      }
+                      ],
+                      
+                      "outputContexts": [
+                          {
+                            "name": req.body.session+"/contexts/flag",
+                            "lifespanCount": 5,
+                            "parameters": {
+                              "flag":flag
+                            }
+                          }
+                      ]
+                  });
+            }
+            else
+              toSend = "Please enter new " + field;
     } else if (val == "delete") {
         flag = "delete";
         if (field == "skills") {
-            toSend = "Enter skill to be deleted";
+            toSend = "Please enter skill to be deleted";
+
         } else if (field == "interests") {
-            toSend = "Enter interest to be deleted";
+            toSend = "Please enter interest to be deleted";
+
         } else if (field == "achievements") {
-            toSend = "Enter achievement to be deleted";
+            toSend = "Please enter achievement to be deleted";
         } else if (field == "education") {
-            toSend = "Enter record index to be deleted";
+            toSend = "Please enter record index to be deleted";
 
         } else if (field == "projects") {
-            toSend = "Enter record index to be deleted";
+            toSend = "Please enter record index to be deleted";
 
         } else if (field == "experience") {
-            toSend = "Enter record index to be deleted";
+            toSend = "Please enter record index to be deleted";
 
         }
     } else
