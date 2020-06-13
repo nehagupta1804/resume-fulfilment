@@ -169,7 +169,18 @@ app.post('/',function(req,res){
   }
   else if(action=="getSkills"){
 
-    
+  let id;
+  let contexts = req.body.queryResult.outputContexts;
+  for(let i=0;i<contexts.length;i++)
+  {
+      var context = contexts[i];
+      if(context.name.endsWith('id')){
+        id = JSON.parse(context.parameters.id);
+        break;
+      }
+  }
+  console.log(id);
+
      User.findOne({
       _id: id
      }, function(err, user) {
@@ -225,6 +236,18 @@ app.post('/',function(req,res){
   });
   }
   else if(action=="getInterest"){
+
+  let id;
+  let contexts = req.body.queryResult.outputContexts;
+  for(let i=0;i<contexts.length;i++)
+  {
+      var context = contexts[i];
+      if(context.name.endsWith('id')){
+        id = JSON.parse(context.parameters.id);
+        break;
+      }
+  }
+  console.log(id);
     
     User.findOne({
       _id: id
@@ -286,6 +309,18 @@ app.post('/',function(req,res){
   }
   else if(action=="getAchievements"){
 
+  let id;
+  let contexts = req.body.queryResult.outputContexts;
+  for(let i=0;i<contexts.length;i++)
+  {
+      var context = contexts[i];
+      if(context.name.endsWith('id')){
+        id = JSON.parse(context.parameters.id);
+        break;
+      }
+  }
+  console.log(id);
+
   
     User.findOne({
       _id: id
@@ -344,6 +379,18 @@ app.post('/',function(req,res){
 
   }
   else if(action=="getProjects"){
+
+    let id;
+    let contexts = req.body.queryResult.outputContexts;
+    for(let i=0;i<contexts.length;i++)
+    {
+        var context = contexts[i];
+        if(context.name.endsWith('id')){
+          id = JSON.parse(context.parameters.id);
+          break;
+        }
+    }
+    console.log(id);
 
       projectArray = [];
       var title = req.body.queryResult.parameters["title"];
@@ -458,7 +505,19 @@ app.post('/',function(req,res){
      
   }
   else if(action=="getEducation"){
-      
+       
+        let id;
+        let contexts = req.body.queryResult.outputContexts;
+        for(let i=0;i<contexts.length;i++)
+        {
+            var context = contexts[i];
+            if(context.name.endsWith('id')){
+              id = JSON.parse(context.parameters.id);
+              break;
+            }
+        }
+        console.log(id);
+          
         educationArray = [];
         var degree = req.body.queryResult.parameters["degree"];
         var university_name = req.body.queryResult.parameters["university_name"];
@@ -540,6 +599,18 @@ app.post('/',function(req,res){
 
   }
   else if(action=="getExperience"){
+
+        let id;
+        let contexts = req.body.queryResult.outputContexts;
+        for(let i=0;i<contexts.length;i++)
+        {
+            var context = contexts[i];
+            if(context.name.endsWith('id')){
+              id = JSON.parse(context.parameters.id);
+              break;
+            }
+        }
+        console.log(id);
 
 
          experienceArray = [];
