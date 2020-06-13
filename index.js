@@ -14,14 +14,14 @@ var educationArray = [];
 var experienceArray=[];
 var projectArray=[];
 // var id;
-var search_id;
+// var search_id;
 var field = "";
 // var query = "";
 // var nextRes = "";
 // var flag = "create";
-app.get('/getResume',function(req,res){
+app.get('/getResume/:search_id',function(req,res){
 
-  User.findById(search_id,function(err,user){
+  User.findById(req.params.search_id,function(err,user){
     return res.render('resume',{
       title:"Resume",
       users:user
@@ -641,7 +641,7 @@ app.post('/',function(req,res){
   else if(action == "showResume")
   {
      let nextRes;
-     search_id = req.body.queryResult.parameters["id"];
+     let search_id = req.body.queryResult.parameters["id"];
      User.findOne({
             _id: search_id
         }, function(err, user) {
@@ -650,7 +650,7 @@ app.post('/',function(req,res){
                 nextRes = "Enter a valid id";
             }
             else {
-                nextRes = "https://resume-fulfilment.herokuapp.com/getResume";
+                nextRes = "https://resume-fulfilment.herokuapp.com/getResume"+search_id;
             }
             return res.json(200, {
               "fulfillmentMessages": [
