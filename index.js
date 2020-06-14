@@ -36,12 +36,12 @@ app.post('/',function(req,res){
   console.log('action: ' + action);
   // console.log('user id' + id);
   if(action =="getName"){
-      let nextRes,query;
-      var name = req.body.queryResult.parameters["namelist"]["given-name"];
-      if(name ===  undefined)
-        query = req.body.queryResult.parameters["namelist"];
-      else
-        query = req.body.queryResult.parameters["namelist"]["given-name"];
+    let nextRes,query;
+    var name = req.body.queryResult.parameters["namelist"]["given-name"];
+    if(name ===  undefined)
+      query = req.body.queryResult.parameters["namelist"];
+    else
+      query = req.body.queryResult.parameters["namelist"]["given-name"];
     let flag;
     let contexts = req.body.queryResult.outputContexts;
     console.log(contexts);
@@ -116,7 +116,7 @@ app.post('/',function(req,res){
           console.log(" user created \n");
           var id = user._id;
             console.log(id);
-            nextRes= "Enter email";
+            nextRes= "Please enter email";
             return res.json(200, {
               "fulfillmentMessages": [
                 {
@@ -148,8 +148,6 @@ app.post('/',function(req,res){
 
            ]
           });
-          
-          
           });
         } 
   
@@ -544,8 +542,6 @@ app.post('/',function(req,res){
           
     
 
-       
-
   }
   else if(action=="getAchievements"){
 
@@ -773,11 +769,26 @@ app.post('/',function(req,res){
             if (err) {
                 console.log("cant be updated");
                 nextRes = "Enter a valid id";
+                return res.json(200, {
+                  "fulfillmentMessages": [
+                    {
+                      "platform": "ACTIONS_ON_GOOGLE",
+                      "simpleResponses": {
+                        "simpleResponses": [
+                          {
+                            "textToSpeech": [nextRes]
+                          }
+                        ]
+                      }
+                    }
+                  ]
+              });
             }
             else {
                 nextRes = "http://resume-fulfilment.herokuapp.com/getResume/?search_id="+ String(search_id);
 
             }
+            console.log(nextRes);
             return res.json(200, {
               "fulfillmentMessages": [
                 {
