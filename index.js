@@ -18,6 +18,7 @@ const updateresume_controller = require('./controllers/updateresume_controller')
 const modifyaction_controller = require('./controllers/modifyaction_controller');
 const getindex_controller = require('./controllers/getindex_controller');
 const getjobbyskill_controller = require('./controllers/getjobbyskill_controller');
+const submit_controller  = require('./controllers/submit_controller');
 app.use(express.json());
 app.use(express.urlencoded({
     extended: false
@@ -111,6 +112,10 @@ app.post('/', function(req, res) {
 
         return (getjobbyskill_controller.getJobBySkill(req,res));
        
+    }else if (action == "submit") {
+
+        return (submit_controller.submit(req,res));  
+
     }
 });
 app.listen(port, function(err) {

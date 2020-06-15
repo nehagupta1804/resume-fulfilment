@@ -42,7 +42,7 @@ module.exports.modifyAction = function(req,res)
                                         "title": "Web Development"
                                     },
                                     {
-                                        "title": "NodeJs"
+                                        "title": "Node Js"
                                     },
                                     {
                                         "title": "Javascript"
@@ -152,7 +152,7 @@ module.exports.modifyAction = function(req,res)
                 toSend = "Please enter interest to be deleted";
 
             } else if (field == "achievements") {
-                toSend = "Please enter achievement to be deleted";
+                toSend = "Please enter record index to be deleted";
             } else if (field == "education") {
                 toSend = "Please enter record index to be deleted";
 

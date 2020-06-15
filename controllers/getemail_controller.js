@@ -72,7 +72,7 @@ module.exports.getEmail =  function(req,res)
                                     "title": "Web Development"
                                 },
                                 {
-                                    "title": "NodeJs"
+                                    "title": "Node.Js"
                                 },
                                 {
                                     "title": "Javascript"
@@ -102,7 +102,7 @@ module.exports.getEmail =  function(req,res)
                                     "title": "Cloud"
                                 },
                                 {
-                                    "title": "Blockchain"
+                                    "title": "blockchain"
                                 }
                             ]
                         }
@@ -132,7 +132,5 @@ module.exports.getEmail =  function(req,res)
                 ]  
         });
     });
-
-
 
 }

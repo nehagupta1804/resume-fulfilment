@@ -14,6 +14,7 @@ module.exports.getSkills = function(req,res)
     console.log(flag);
 
     let id;
+    let found=1;
     if (flag == "create") {
 
         let contexts = req.body.queryResult.outputContexts;
@@ -55,12 +56,18 @@ module.exports.getSkills = function(req,res)
         } else if (flag == "delete") {
             var main_str = user.skills;
             var str = req.body.queryResult.queryText;
+            main_str = main_str.toLowerCase();
+            str = str.toLowerCase();
             if (main_str.includes("," + str))
                 query = main_str.replace("," + str, "");
             else if (main_str.includes(str + ","))
                 query = main_str.replace(str + ",", "");
-            else
+            else if(main_str.includes(str))
                 query = main_str.replace(str, "");
+            else{
+                query = main_str;
+                found = 0;
+            }
         }
         User.findByIdAndUpdate(id, {
             "skills": query
@@ -122,8 +129,10 @@ module.exports.getSkills = function(req,res)
 
             } else if (flag == "add")
                 nextRes = "Resume Updated";
-            else
+            else if(flag == "delete" && found ==1)
                 nextRes = "Resume Updated";
+            else
+                nextRes = "Skill not found."
             return res.json(200, {
                 "fulfillmentMessages": [{
                     "platform": "ACTIONS_ON_GOOGLE",
