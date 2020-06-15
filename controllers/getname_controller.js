@@ -1,4 +1,4 @@
-const User = require('./models/user');
+const User = require('../models/user');
 module.exports.getName = function(req,res)
 {
     let nextRes, query;
